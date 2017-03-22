@@ -1,0 +1,43 @@
+#!/usr/bin/env node
+
+var debug = require('debug')('cupireservas');
+var db = require("../models");
+var Promise = require('bluebird');
+var fs = require("fs");
+
+generateData();
+
+function generateData() {
+    var usuarioCreado;
+    db.sequelize.sync({
+        force: true
+    }).then(function() {
+        return db.Usuario.create({
+            usuario: "tpulga",
+            nombre: "Tomas Pulgarin",
+            rol: "C",
+            email: "tpulga@hotmail.com",
+            password: "tpulga",
+        });
+    }).then(function() {
+        return db.Categoria.create({
+            nombre: "Categoria A",
+            descripcion: "Categoria de Prueba A",
+            tipo: "Y"
+        });
+    }).then(function() {
+        return db.Elemento.create(  {
+            nombre: "Categoria A",
+            descripcion: "Categoria de Prueba A",
+            tipo: "M",
+            CategoriumId: 1
+        });
+    }).then(function() {
+        return db.Costo.create(  {
+            effdt: "2017-03-01",
+            valor: "35000",
+            ElementoId: 1
+        });
+    });
+
+}
