@@ -5,36 +5,14 @@ var express = require('express');
 var path = require('path');
 var fs = require('fs');
 var favicon = require('serve-favicon');
-var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var logger = require('morgan');
+
 //Used for passport
-var flash    = require('connect-flash');
-var session = require('express-session');
 var passport = require('passport');
 var moment = require('moment');
-//Template
-var gulp = require('gulp');
-var usemin = require('gulp-usemin');
-var wrap = require('gulp-wrap');
-var connect = require('gulp-connect');
-var watch = require('gulp-watch');
-var minifyCss = require('gulp-cssnano');
-var minifyJs = require('gulp-uglify');
-var concat = require('gulp-concat');
-var less = require('gulp-less');
-var rename = require('gulp-rename');
-var minifyHTML = require('gulp-htmlmin');
-var service = require('gulp-service');
-
-var paths = {
-    scripts: 'src/js/**/*.*',
-    styles: 'src/less/**/*.*',
-    images: 'src/img/**/*.*',
-    templates: 'src/templates/**/*.html',
-    index: 'src/index.html',
-    bower_fonts: 'src/components/**/*.{ttf,woff,eof,svg}',
-};
+var session = require('express-session');
 
 
 
@@ -67,7 +45,7 @@ app.set('view engine', 'html');
 if (config.server.allowCORS) {
     var cors = require('cors');
     app.use(cors({
-        origin: 'http://localhost:3000',
+        origin: 'http://localhost:3010',
 				credentials: true
     }));
 }
@@ -121,49 +99,6 @@ fs
         app.use('/api/' + name, require('./routes/' + file));
     });
 
-//Template
-/*
-app.use(function() {
-    return gulp.src(paths.index)
-        .pipe(usemin({
-            js: [minifyJs(), 'concat'],
-            css: [minifyCss({keepSpecialComments: 0}), 'concat'],
-        }))
-        .pipe(gulp.dest('dist/'));
-});
-
-app.use(function() {
-    return gulp.src(paths.bower_fonts)
-        .pipe(rename({
-            dirname: '/fonts'
-        }))
-        .pipe(gulp.dest('dist/lib'));
-});
-
-app.use(function() {
-    return gulp.src(paths.images)
-        .pipe(gulp.dest('dist/img'));
-});
-
-app.use(function() {
-    return gulp.src(paths.scripts)
-        .pipe(minifyJs())
-        .pipe(concat('dashboard.min.js'))
-        .pipe(gulp.dest('dist/js'));
-});
-
-app.use(function() {
-    return gulp.src(paths.styles)
-        .pipe(less())
-        .pipe(gulp.dest('dist/css'));
-});
-
-
-app.use(function() {
-    return gulp.src(paths.templates)
-        .pipe(minifyHTML())
-        .pipe(gulp.dest('dist/templates'));
-});*/
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

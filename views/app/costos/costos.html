@@ -1,40 +1,66 @@
-<rd-widget>
-  <rd-widget-header icon="fa-tasks" title="Costos"></rd-widget-header>
-  <rd-widget-body classes="large no-padding" >
-      <div ng-controller="costosCtrl">
-          <ng-form class="form-horizontal" ng-action="#/costos">
-            <div class="form-group">
-              <label class="control-label col-sm-2" for="tipo">Elemento:</label>
-              <div class="col-sm-4">
-                  <select name="elmId" ng-model="filtro.elmId" ng-options="elemento.id as elemento.nombre for elemento in elementos">
-                  </select>
-              </div>
-          </div>
-                <div class="form-group">
-                  <div class="col-sm-offset-2 col-sm-1">
-                    <button type="submit" class="btn btn-default" ng-click="buscaCostos()">Ver costos</button>
-                  </div>
-                  <div class="col-sm-offset-2 col-sm-1">
-                    <button type="submit" class="btn btn-default" ng-click="guardarElemento()">Nuevo Costo</button>
-                  </div>
-                </div>
-         </ng-form>
-         <div class="table-responsive" >
-           <table class="table">
-               <thead>
-                   <tr><th></th><th>Fecha</th><th>Valor</th>
-                   </tr>
-               </thead>
-             <tbody>
-               <!--<tr ng-repeat="categoria in categorias"><td><span ng-class="{'text-success':categoria.estado == 'N'}"><i class="fa fa-flag"></i></span></td><td>{{categoria.id}}</td><td>{{categoria.nombre}}</td><td>{{categoria.descripcion}}</td><td><button type="button" class="btn btn-default" ng-click="editCategoria(categoria)" ><span ng-class="{'text-success':categoria.estado == 'N'}" ><i class="glyphicon glyphicon-edit" ><</i></span></button></td></tr>-->
-               <tr ng-repeat="costo in costos">
-                   <td></td>
-                   <td>{{costo.effdt}}</td>
-                   <td>{{categoria.valor}}</td>
-               </tr>
-             </tbody>
-           </table>
-         </div>
-      </div>
-  </rd-widget-body>
- </rd-widget>
+<section id="main-content" ng-controller="costosCtrl">
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="page-header"><i class="fa fa-file-text-o"></i> Costo Elementos</h3>
+                <ol class="breadcrumb">
+                    <li><i class="fa fa-home"></i><a href="../../index.html">Home</a></li>
+                    <li><i class="icon_document_alt"></i>Costos</li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                      Costo Elementos
+                    </header>
+                    <div class="panel-body">
+                        <div ng-controller="costosCtrl">
+                            <ng-form class="form-horizontal" ng-action="#/costos">
+                                <div class="form-group">
+                                  <label class="control-label col-sm-2" for="tipo">Categria:</label>
+                                  <div class="col-sm-4">
+                                      <select name="catId" ng-model="filtro.catId" ng-options="categoria.id as categoria.nombre for categoria in categorias" ng-change ="buscaElementos(filtro.catId)">
+                                      </select>
+                                  </div>
+                              </div>
+                              <div class="form-group">
+                                <label class="control-label col-sm-2" for="tipo">Elemento:</label>
+                                <div class="col-sm-4">
+                                    <select name="elmId" ng-model="filtro.elmId" ng-options="elemento.id as elemento.nombre for elemento in elementos">
+                                    </select>
+                                </div>
+                            </div>
+                                  <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-1">
+                                      <button type="submit" class="btn btn-default" ng-click="buscaCostos()">Ver costos</button>
+                                    </div>
+                                    <div class="col-sm-offset-2 col-sm-1">
+                                      <button type="submit" class="btn btn-default" ng-click="crearCosto()">Nuevo Costo</button>
+                                    </div>
+                                  </div>
+                           </ng-form>
+                           <div class="table-responsive" >
+                             <table class="table">
+                                 <thead>
+                                     <tr><th></th><th>Fecha</th><th>Valor</th>
+                                     </tr>
+                                 </thead>
+                               <tbody>
+                                 <tr ng-repeat="costo in costos">
+                                     <td></td>
+                                     <td>{{costo.effdt}}</td>
+                                     <td>{{costo.valor}}</td>
+                                 </tr>
+                               </tbody>
+                             </table>
+                           </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <!-- page end-->
+    </section>
+</section>

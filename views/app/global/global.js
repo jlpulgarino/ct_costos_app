@@ -10,6 +10,7 @@ app.service('utils', function() {
     };
 
 });
+
 /**
  * Directiva de funcionalidad y elementos globales para la aplicación
  */
@@ -49,7 +50,6 @@ app.directive('dirGlobal', function(){
             for (var i in mobile)
                 if (navigator.userAgent.toLowerCase().indexOf(mobile[i].toLowerCase()) > 0)
                     return true;
-
                 /* nothing found.. assume desktop */
                 return false;
             }

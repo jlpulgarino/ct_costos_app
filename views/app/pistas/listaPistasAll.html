@@ -1,0 +1,59 @@
+<section id="main-content" ng-controller="CncrsPistasCtrl">
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="page-header"><i class="fa fa-file-text-o"></i>Concurso: {{concursoActual.nombre}}</h3>
+                <ol class="breadcrumb">
+                    <li><i class="fa fa-home"></i><a href="../../index.html">Home</a></li>
+                    <li><i class="fa fa-file-text-o"></i>cuenta</li>
+                    <li><i class="icon_document_alt"></i>concursos</li>
+                    <li><i class="fa fa-file-text-o"></i>pistas</li>
+                </ol>
+            </div>
+        </div>
+      <div class="row">
+          <div class="col-lg-12">
+              <section class="panel">
+                  <header class="panel-heading">
+                      Pistas postuladas
+                  </header>
+
+                  <table class="table table-striped table-advance table-hover">
+                   <tbody>
+                      <tr>
+                         <th><i class="icon_profile"></i> Id</th>
+                         <th><i class="icon_profile"></i> Autor</th>
+                         <th><i class="icon_pin_alt"></i> Email</th>
+                         <th><i class="icon_calendar"></i> Nombre</th>
+                         <th><i class="icon_calendar"></i> Estado</th>
+                         <th><i class="icon_calendar"></i> Fecha</th>
+                         <th><i class="icon_cogs"></i> Reproducir</th>
+                         <th><i class="icon_cogs"></i> Acccion</th>
+                      </tr>
+                      <tr ng-repeat="pista in pistas">
+                         <td>{{pista.id}}</td>
+                         <td>{{pista.nombre}} {{pista.apellido}}</td>
+                         <td>{{pista.email}}</td>
+                         <td>Pista {{pista.id}}</td>
+                         <td>{{pista.estado}}</td>
+                         <td>{{pista.createdAt}}</td>
+                         <td>
+                          <div class="btn-group">
+                              <audio controls src="http://localhost:3000/api/pistas/voz/ddfg" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                                </audio>
+                          </div>
+                          </td>
+                         <td>
+                          <div class="btn-group">
+                              <a class="btn btn-primary" ng-click="verTexto(pista)"><i class="icon_comment_alt"></i></a>
+                          </div>
+                          </td>
+                      </tr>
+                   </tbody>
+                </table>
+              </section>
+          </div>
+      </div>
+    </section>
+</section>

@@ -75,19 +75,37 @@ router.get('/:id/elementosAll', function(req, res, next) {
                 model: db.Costo
             }]
         }]
-    }).then(function(resp) {
-        var costos = [];
-        if(resp.length > 0){
-            for(var i = 0; i<resp.length; i++ ){
-                for(var j = 0; j<resp[0].Elementos.length; j++ ){
-                    var elmTmp = resp[i].Elementos[j];
-                    elmTmp.nombre = '('+resp[i].nombre +')--'+ elmTmp.nombre;
-                    costos.push(elmTmp);
-                }
-            }
-        }
-        return res.send(costos);
+    }).then(function(categorias) {
+        return categorias;
+    }).then(categorias => {
+        const resObj = categorias.map(categoria => {
+                return Object.assign({}, {
+                    id: categoria.id,
+                    nombre: categoria.nombre,
+                    descripcion: categoria.descripcion,
+                    tipo: categoria.tipo,
+                    elementos: categoria.Elementos.map(elemento => {
+                        return Object.assign({}, {
+                            id: elemento.id,
+                            nombre: elemento.nombre,
+                            descripcion: elemento.descripcion,
+                            tipo: elemento.tipo,
+                            costos: elemento.Costos.map(costo => {
+                                return Object.assign({}, {
+                                    id: costo.id,
+                                    effdt: costo.effdt,
+                                    valor: costo.valor
+                                })
+                            })
+                        })
+                    })
+                })
+            })
+            //res.send(tareas)
+            //console.log(resObj);
+        res.send(resObj);
     }).catch(next);
+
 });
 
 

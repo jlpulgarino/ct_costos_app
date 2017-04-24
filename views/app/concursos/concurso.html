@@ -1,0 +1,78 @@
+<section id="main-content" ng-controller="ConcursosCtrl">
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="page-header"><i class="fa fa-file-text-o"></i> Creacion de Concurso</h3>
+                <ol class="breadcrumb">
+                    <li><i class="fa fa-home"></i><a href="../../index.html">Home</a></li>
+                    <li><i class="icon_document_alt"></i>usuarios</li>
+                    <li><i class="fa fa-file-text-o"></i>cuenta</li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                       Cargar Pista
+                    </header>
+                    <div class="panel-body">
+                        <form role="form"  >
+                        <!--<form role="form"  id="uploadForm" enctype   =  "multipart/form-data">-->
+                        <div class="form-group">
+                            <label for="nombre">Id</label>
+                            <input type="text" class="form-control" ng-model="concurso._id" id="_id" name="_id" disabled >
+                        </div>
+                        <div class="form-group">
+                            <label for="nombre">Nombre</label>
+                            <input type="text" class="form-control" ng-model="concurso.nombre" id="nombre" name="nombre" placeholder="Digite nombre.." >
+                        </div>
+                        <div class="form-group">
+                            <label for="url">Url</label>
+                            <input type="text" class="form-control" ng-model="concurso.url" id="url" name="url" placeholder="Digite la url del concurso.." >
+                        </div>
+                        <div class="form-group">
+                            <label for="valor">Valor</label>
+                            <input type="text" class="form-control" ng-model="concurso.valor" id="valor" name="valor" placeholder="Digite el valor  del concurso.." >
+                        </div>
+                        <div class="form-group">
+                            <label for="fechaIni">Fecha Inicio</label>
+                            <input bled type="date"  class="form-control" ng-model="concurso.fechaIni" id="fechaIni" name="fechaIni" placeholder="Digite fecha inicio del concurso.." >
+                        </div>
+                        <div class="form-group">
+                            <label for="fechaFin">Fecha Fin</label>
+                            <input bled type="date"  class="form-control" ng-model="concurso.fechaFin" id="fechaFin" name="fechaFin" placeholder="Digite fecha final del concurso.." >
+                        </div>
+                        <div class="form-group">
+                            <label for="texto">Texto para audio</label>
+                            <input type="text" class="form-control" ng-model="concurso.texto" id="texto" name="texto" placeholder="Digite el texto  del concurso.." >
+                        </div>
+                        <div class="form-group">
+                            <label for="recomendacion">Recomendaciones</label>
+                            <input type="text" class="form-control" ng-model="concurso.recomendacion" id="recomendacion" name="recomendacion" placeholder="Digite las recomendaciones  del concurso.." >
+                        </div>
+                        <div class="form-group">
+                            <label for="CuentumId ">Cuenta</label>
+                            <input type="text" class="form-control" ng-model="concurso.CuentumId" id="CuentumId" name="CuentumId"  disabled >
+                        </div>
+                            <div class="form-group">
+                                <label for="file">Banner</label>
+                                <input type="file" id="file" name="file" ng-model="file" >
+                                <p class="help-block">Seleccione una imagen.</p>
+                            </div>
+                            <div ng-show="message.error" class="alert alert-block alert-danger fade in">
+                                <button data-dismiss="alert" class="close close-sm" type="button">
+                                    <i class="icon-remove"></i>
+                                </button>
+                                <strong>{{message.error}}</strong>
+                            </div>
+                            <!--<button type="submit" class="btn btn-primary" ng-click="cargar(pista, file)">Submit</button>-->
+                            <button type="submit" class="btn btn-primary" ng-click="guardar()" >Submit</button>
+                        </form>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <!-- page end-->
+    </section>
+</section>

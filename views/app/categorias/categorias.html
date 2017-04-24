@@ -1,41 +1,43 @@
-<div class="row">
-  <div class="col-lg-8">
-    <rd-widget>
-      <rd-widget-header icon="fa-tasks" title="Categorias"></rd-widget-header>
-      <rd-widget-body classes="large no-padding">
-        <div class="table-responsive" data-ng-controller="CategoriasCtrl">
-          <table class="table">
-              <thead>
-                  <tr><th></th><th class="text-center">ID</th><th>Categoria</th><th>Descripcion</th><th><span ng-class='text-success' ><i class="glyphicon glyphicon-edit" ></i></span></th><th><a ng-href="#/categorias/edit" ng-click="addCategoria()" ><span ng-class='text-success'><i class="glyphicon glyphicon-plus" ></i></span></a></th>
-                  </tr>
-              </thead>
-            <tbody>
-              <!--<tr ng-repeat="categoria in categorias"><td><span ng-class="{'text-success':categoria.estado == 'N'}"><i class="fa fa-flag"></i></span></td><td>{{categoria.id}}</td><td>{{categoria.nombre}}</td><td>{{categoria.descripcion}}</td><td><button type="button" class="btn btn-default" ng-click="editCategoria(categoria)" ><span ng-class="{'text-success':categoria.estado == 'N'}" ><i class="glyphicon glyphicon-edit" ><</i></span></button></td></tr>-->
-              <tr ng-repeat="categoria in categorias">
-                  <td><span ng-class="{'text-success':categoria.estado == 'N'}"><i class="fa fa-flag"></i></span></td>
-                  <td>{{categoria.id}}</td>
-                  <td>{{categoria.nombre}}</td>
-                  <td>{{categoria.descripcion}}</td>
-                  <td><a ng-href="#/categorias/edit" ng-click="editCategoria(categoria)" ><span ng-class="{'text-success':categoria.estado == 'N'}" ><i class="glyphicon glyphicon-edit" ></i></span></a></td>
-                  <td><a ng-href="#/categorias/edit" ng-click="addCategoria()" ><span ng-class='text-success'><i class="glyphicon glyphicon-plus" ></i></span></a></td>
-                  <td><a ng-click="delCategoria($event,categoria)" ><span ><i class="glyphicon glyphicon-minus" ></i></span></a></td>
-              </tr>
-            </tbody>
-          </table>
+<section id="main-content" ng-controller="CategoriasCtrl">
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="page-header"><i class="fa fa-file-text-o"></i> Categorias</h3>
+                <ol class="breadcrumb">
+                    <li><i class="fa fa-home"></i><a href="../../index.html">Home</a></li>
+                    <li><i class="icon_document_alt"></i>Categorias</li>
+                </ol>
+            </div>
         </div>
-      </rd-widget-body>
-      <!--<rd-widget-footer>
-        <ul class="pagination pagination-sm pull-right">
-          <li><a href="#">&laquo;</a></li>
-          <li><a href="#">1</a></li>
-          <li><a href="#">2</a></li>
-          <li><a href="#">3</a></li>
-          <li><a href="#">4</a></li>
-          <li><a href="#">5</a></li>
-          <li><a href="#">&raquo;</a></li>
-        </ul>
-        <div class="clearfix"></div>
-    </rd-widget-footer>-->
-    </rd-widget>
-  </div>
-</div>
+        <div class="row">
+            <div class="col-lg-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                       Listado de categorias
+                    </header>
+                    <div class="panel-body">
+                        <table class="table">
+                            <thead>
+                                <tr><th></th><th class="text-center">ID</th><th>Categoria</th><th>Descripcion</th><th><span ng-class='text-success' ><i class="icon-edit-l" ></i></span></th><th><a ng-href="#/categorias/edit" ng-click="addCategoria()" ><span ng-class='text-success'><i class="icon_plus" ></i></span></a></th>
+                                </tr>
+                            </thead>
+                          <tbody>
+                            <!--<tr ng-repeat="categoria in categorias"><td><span ng-class="{'text-success':categoria.estado == 'N'}"><i class="fa fa-flag"></i></span></td><td>{{categoria.id}}</td><td>{{categoria.nombre}}</td><td>{{categoria.descripcion}}</td><td><button type="button" class="btn btn-default" ng-click="editCategoria(categoria)" ><span ng-class="{'text-success':categoria.estado == 'N'}" ><i class="glyphicon glyphicon-edit" ><</i></span></button></td></tr>-->
+                            <tr ng-repeat="categoria in categorias">
+                                <td><span ng-class="{'text-success':categoria.estado == 'N'}"><i class="fa fa-flag"></i></span></td>
+                                <td>{{categoria.id}}</td>
+                                <td>{{categoria.nombre}}</td>
+                                <td>{{categoria.descripcion}}</td>
+                                <td><a ng-click="editCategoria(categoria)" ><span ng-class="{'text-success':categoria.estado == 'N'}" ><i class="icon-edit-l" ></i></span></a></td>
+                                <td><a ng-click="addCategoria()" ><span ng-class='text-success'><i class="icon_plus" ></i></span></a></td>
+                                <td><a ng-click="delCategoria($event,categoria)" ><span ><i class="icon_close_alt2" ></i></span></a></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <!-- page end-->
+    </section>
+</section>

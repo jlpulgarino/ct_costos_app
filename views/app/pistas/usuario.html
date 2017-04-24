@@ -1,0 +1,88 @@
+<div layout="column"
+    layout-align="center">
+    <div layout="row"
+        layout-align="center center">
+        <div style="background-color:#00A000;height: 40px;"
+            flex="80">
+            <md-toolbar class="md-warn md-hue-1">
+                <div class="md-toolbar-tools"
+                    layout="row">
+                    <h4 layout="row"
+                        layout-align="center">
+                        Calificación exámen:
+                    </h4>
+                    <span flex></span>
+                    <h3 class="md-flex"
+                        layout-align="center">
+                        {{calificacionExamen.calificacionExamen.ponderado}}/5
+                    </h3>
+                </div>
+
+            </md-toolbar>
+            <md-toolbar md-scroll-shrink>
+                <div class="md-toolbar-tools"
+                    layout="row">
+                    <h3 flex="40"
+                        layout="row"
+                        layout-align="center">
+                        Pregunta
+                    </h3>
+                    <span flex></span>
+                    <h3 flex="20"
+                        layout="row"
+                        layout-align="center">
+                        Calificación
+                    </h3>
+                    <h3 flex="20"
+                        layout="row"
+                        layout-align="center">
+                        Porcentaje
+                    </h3>
+                </div>
+            </md-toolbar>
+            <md-content flex>
+                <md-list flex>
+                    <div ng-repeat="calificacion in calificacionExamen.calificacionExamen.calificaciones">
+                        <md-list-item class="md-3-line"
+                            ng-click="showRetroalimentacion = !showRetroalimentacion">
+                            <h3 flex="40">
+                                <span>Pregunta {{calificacion.pregunta.Examen_pregunta.numero}}</span>
+                            </h3>
+                            <span flex></span>
+                            <h3 flex="20"
+                                layout="row"
+                                layout-align="center">{{calificacion.respuesta.nota}}/5</h3>
+                            <h3 flex="20"
+                                layout="row"
+                                layout-align="center">{{calificacion.pregunta.Examen_pregunta.peso}}%</h3>
+                        </md-list-item>
+                        <p layout="row"
+                            layout-align="center"
+                            ng-show="showRetroalimentacion"
+                            ng-repeat="punto in calificacion.respuesta.retroalimentacion track by $index">
+                                {{punto}}
+                            <br>
+                        </p>
+                    </div>
+                </md-list>
+            </md-content>
+        </div>
+    </div>
+</div>
+<!--
+<md-content flex
+    style="height: 450px;" ng-show="showRetroalimentacion">
+    <md-subheader>
+        <h3>Retroalimentación</h3></md-subheader>
+    <md-list class="md-dense">
+        <md-list-item class="md-1-line"
+            ng-repeat="punto in calificacion.respuesta.retroalimentacion track by $index"
+            >
+            <div class="md-list-item-text"
+                layout="column">
+                <p>{{punto}}</p>
+            </div>
+        </md-list-item>
+    </md-list>
+</md-content>
+-->

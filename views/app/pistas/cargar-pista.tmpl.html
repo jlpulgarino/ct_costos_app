@@ -1,0 +1,48 @@
+<md-dialog aria-label="Cargar Pista">
+    <form ng-cloak>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Cargar pista</h2>
+                <span flex></span>
+                <md-button class="md-icon-button"
+                    ng-click="cancel()">
+                    <md-icon md-svg-src="../../img/icons/close.svg"
+                        aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <div class="md-dialog-content"
+                layout="column">
+                <p>Seleccione un nombre para la pista y un archivo de la pista a cargar.</p>
+                <div layout="column"
+                    layout-align="start center">
+                    <md-input-container>
+                        <label>Nombre de la pista</label>
+                        <input ng-model="archivoPista.nombre">
+                    </md-input-container>
+
+                    <md-button ngf-select
+                        ng-model="file"
+                        class="md-primary {{file?'':'md-raised'}}"
+                        md-autofocus>
+                        {{file?file.name:'Seleccionar Pista'}}
+                    </md-button>
+                </div>
+
+            </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button ng-click="cancel()">
+                Cancelar
+            </md-button>
+            <md-button class="md-primary md-raised"
+                ng-click="cargar(archivoPista, file)">
+                Cargar
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>
