@@ -20,7 +20,9 @@ module.exports = function(sequelize, DataTypes) {
         classMethods: {
             associate: function(dbP) {
                 db = dbP;
-                //db.Proyecto.hasMany(db.Subproyecto);
+                db.Categoriaproceso.belongsTo(db.Proceso);
+                db.Categoriaproceso.belongsTo(db.Categoria);
+                db.Categoriaproceso.hasMany(db.Elementoproceso);
             },
             save: function(model) {
                 return db.Categoriaproceso.findById(model.id).then(function(modelAnt) {

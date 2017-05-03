@@ -27,8 +27,8 @@ function generateData() {
         });
     }).then(function() {
         return db.Elemento.create(  {
-            nombre: "Categoria A",
-            descripcion: "Categoria de Prueba A",
+            nombre: "Elemeento A001",
+            descripcion: "Elemeento A001",
             tipo: "M",
             CategoriumId: 1
         });
@@ -37,6 +37,11 @@ function generateData() {
             effdt: "2017-03-01",
             valor: "35000",
             ElementoId: 1
+        });
+    }).then(function() {
+        return db.Proceso.create({
+            nombre: "Proceso A",
+            descripcion: "Proceso A"
         });
     });
 

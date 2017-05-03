@@ -1,0 +1,43 @@
+<section id="main-content" ng-controller="ProcesosCtrl">
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="page-header"><i class="fa fa-file-text-o"></i> Procesos</h3>
+                <ol class="breadcrumb">
+                    <li><i class="fa fa-home"></i><a href="../../index.html">Home</a></li>
+                    <li><i class="icon_document_alt"></i>Procesos</li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                       Listado de procesos
+                    </header>
+                    <div class="panel-body">
+                        <table class="table">
+                            <thead>
+                                <tr><th></th><th class="text-center">ID</th><th>Proceso</th><th>Descripcion</th><th><span ng-class='text-success' ><i class="icon-edit-l" ></i></span></th><th><a ng-href="#/procesos/edit" ng-click="addProceso()" ><span ng-class='text-success'><i class="icon_plus" ></i></span></a></th>
+                                </tr>
+                            </thead>
+                          <tbody>
+                            <!--<tr ng-repeat="proceso in procesos"><td><span ng-class="{'text-success':proceso.estado == 'N'}"><i class="fa fa-flag"></i></span></td><td>{{proceso.id}}</td><td>{{proceso.nombre}}</td><td>{{proceso.descripcion}}</td><td><button type="button" class="btn btn-default" ng-click="editProceso(proceso)" ><span ng-class="{'text-success':proceso.estado == 'N'}" ><i class="glyphicon glyphicon-edit" ><</i></span></button></td></tr>-->
+                            <tr ng-repeat="proceso in procesos">
+                                <td><span ng-class="{'text-success':proceso.estado == 'N'}"><i class="fa fa-flag"></i></span></td>
+                                <td>{{proceso.id}}</td>
+                                <td>{{proceso.nombre}}</td>
+                                <td>{{proceso.descripcion}}</td>
+                                <td><a ng-click="editProceso(proceso)" ><span ng-class="{'text-success':proceso.estado == 'N'}" ><i class="icon-edit-l" ></i></span></a></td>
+                                <td><a ng-click="addProceso()" ><span ng-class='text-success'><i class="icon_plus" ></i></span></a></td>
+                                <td><a ng-click="delProceso($event,proceso)" ><span ><i class="icon_close_alt2" ></i></span></a></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <!-- page end-->
+    </section>
+</section>

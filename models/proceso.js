@@ -30,7 +30,7 @@ module.exports = function(sequelize, DataTypes) {
         classMethods: {
             associate: function(dbP) {
                 db = dbP;
-                //db.Proceso.hasMany(db.Subproyecto);
+                db.Proceso.hasMany(db.Categoriaproceso);
             },
             save: function(model) {
                 return db.Proceso.findById(model.id).then(function(modelAnt) {

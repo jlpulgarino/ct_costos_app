@@ -19,7 +19,7 @@
  * Se declara el modulo de la aplicacion y sus dependencias
  * @type {angular.Module}
  */
-var app = angular.module('app', ['ngRoute', 'ngMaterial', 'ui.ace', 'ui.router', 'angularResizable', 'ngFileUpload']);
+var app = angular.module('app', ['ngRoute', 'ngMaterial', 'ui.ace', 'ui.router', 'angularResizable', 'ngFileUpload','treeGrid']);
 
 /**
  * Configuracion del modulo de la aplicacion
@@ -78,6 +78,18 @@ app.config(["$stateProvider", "$urlRouterProvider", function(t, e) {
     }).state("editCostos", {
         url: "/costos/edit",
         templateUrl: "../app/costos/editCostos.html"
+    }).state("procesos", {
+        url: "/procesos",
+        templateUrl: "../app/procesos/procesos.html"
+    }).state("editProcesos", {
+        url: "/procesos/edit",
+        templateUrl: "../app/procesos/editProceso.html"
+    }).state("elementosPrc", {
+        url: "/procesos/elementosPrc",
+        templateUrl: "../app/procesos/elementosPrc.html"
+    }).state("categoriasPrc", {
+        url: "/procesos/categoriasPrc",
+        templateUrl: "../app/procesos/categoriasPrc.html"
     })/*.state("logout", {
         url: "/logout",
         templateUrl: "../app/login/logout.html"

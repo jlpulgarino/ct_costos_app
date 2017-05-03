@@ -37,6 +37,7 @@
     <!-- Estilos superVoices -->
     <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" type="text/css">
     <link rel="stylesheet" href="bower_components/angular-resizable/angular-resizable.min.css" type="text/css">
+    <link rel="stylesheet" href="bower_components/angular-bootstrap-grid-tree/src/treeGrid.css" type="text/css">
     <!-- =======================================================
         Theme Name: NiceAdmin
         Theme URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
@@ -110,16 +111,18 @@
                         <ul class="sub">
                             <li><a class="" href="#!/usuarios"> Usuarios</a></li>
                             <li><a class="" href="#!/categorias"> Categorias</a></li>
+                            <li><a class="" href="#!/costos"> Costos</a></li>
+                            <li><a class="" href="#!/procesos"> Procesos</a></li>
                         </ul>
                     </li>
                     <li class="sub-menu">
                         <a href="javascript:;" class="">
                             <i class="icon_document_alt"></i>
-                            <span>Concursos</span>
+                            <span>Costeo</span>
                             <span class="menu-arrow arrow_carrot-right"></span>
                         </a>
                         <ul class="sub">
-                            <li><a class="" href="#!/portal/pistas"> Todas las Pistas </a></li>
+                            <li><a class="" href="#!/portal/pistas"> Crear/Editar Costeo </a></li>
                         </ul>
                     </li>
 
@@ -192,6 +195,7 @@
         <script src="bower_components/angular-ui-ace/ui-ace.js"></script>
         <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
         <script src="bower_components/ng-file-upload/ng-file-upload-all.min.js"></script>
+        <script src="bower_components/angular-bootstrap-grid-tree/src/tree-grid-directive.js"></script>
         <!-- Archivos de la aplicación Angular.js -->
         <script src="app/app.js"></script>
         <!-- Controladores -->
@@ -206,6 +210,8 @@
         <script src="app/elementos/elementos.js"></script>
         <script src="app/costos/Costo.js"></script>
         <script src="app/costos/costos.js"></script>
+        <script src="app/procesos/Proceso.js"></script>
+        <script src="app/procesos/procesos.js"></script>
         <script>
             //knob
             $(function() {

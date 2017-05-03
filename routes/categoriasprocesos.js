@@ -43,7 +43,8 @@ router.post('/', function(req, res, next) {
     var data = utils.getterFromPost(req);
     var categoriaEmulado = {
         id: data.get('id'),
-        
+        ProcesoId: data.get('ProcesoId','Debe seleccionar un proceso para la categoria.'),
+        CategoriumId: data.get('CategoriumId','Debe seleccionar una categoria para la categoria de proceso.')
     };
 
     db.Categoriaproceso.save(categoriaEmulado).then(function(categoriaActualizado) {
