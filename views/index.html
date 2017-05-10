@@ -34,6 +34,7 @@
     <link href="template/css/style-responsive.css" rel="stylesheet" />
     <link href="template/css/xcharts.min.css" rel=" stylesheet">
     <link href="template/css/jquery-ui-1.10.4.min.css" rel="stylesheet">
+    <link href="template/css/editable_grid.min.css" rel="stylesheet">
     <!-- Estilos superVoices -->
     <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" type="text/css">
     <link rel="stylesheet" href="bower_components/angular-resizable/angular-resizable.min.css" type="text/css">
@@ -118,11 +119,21 @@
                     <li class="sub-menu">
                         <a href="javascript:;" class="">
                             <i class="icon_document_alt"></i>
+                            <span> Clientes</span>
+                            <span class="menu-arrow arrow_carrot-right"></span>
+                        </a>
+                        <ul class="sub">
+                            <li><a class="" href="#!/clientes"> Clientes</a></li>
+                        </ul>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="javascript:;" class="">
+                            <i class="icon_document_alt"></i>
                             <span>Costeo</span>
                             <span class="menu-arrow arrow_carrot-right"></span>
                         </a>
                         <ul class="sub">
-                            <li><a class="" href="#!/portal/pistas"> Crear/Editar Costeo </a></li>
+                            <li><a class="" href="#!/costeos/edit"> Crear/Editar Costeo </a></li>
                         </ul>
                     </li>
 
@@ -181,6 +192,7 @@
         <script src="template/js/sparklines.js"></script>
         <script src="template/js/charts.js"></script>
         <script src="template/js/jquery.slimscroll.min.js"></script>
+        <script src="template/js/editable_grid.min.js"></script>
         <!--<script src="bower_components/jquery/dist/jquery.min.js"></script>-->
         <!-- librerias -->
         <script src="bower_components/angular/angular.min.js"></script>
@@ -212,6 +224,10 @@
         <script src="app/costos/costos.js"></script>
         <script src="app/procesos/Proceso.js"></script>
         <script src="app/procesos/procesos.js"></script>
+        <script src="app/clientes/Cliente.js"></script>
+        <script src="app/clientes/clientes.js"></script>
+        <script src="app/costeos/Costeo.js"></script>
+        <script src="app/costeos/costeos.js"></script>
         <script>
             //knob
             $(function() {

@@ -90,6 +90,18 @@ app.config(["$stateProvider", "$urlRouterProvider", function(t, e) {
     }).state("categoriasPrc", {
         url: "/procesos/categoriasPrc",
         templateUrl: "../app/procesos/categoriasPrc.html"
+    }).state("clientes", {
+        url: "/clientes",
+        templateUrl: "../app/clientes/clientes.html"
+    }).state("editCliente", {
+        url: "/clientes/edit",
+        templateUrl: "../app/clientes/editCliente.html"
+    }).state("costeos", {
+        url: "/costeos",
+        templateUrl: "../app/costeos/costeos.html"
+    }).state("editCosteo", {
+        url: "/costeos/edit",
+        templateUrl: "../app/costeos/editCosteo.html"
     })/*.state("logout", {
         url: "/logout",
         templateUrl: "../app/login/logout.html"

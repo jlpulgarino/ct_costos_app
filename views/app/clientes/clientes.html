@@ -1,0 +1,42 @@
+<section id="main-content" ng-controller="ClientesCtrl">
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="page-header"><i class="fa fa-file-text-o"></i> Clientes</h3>
+                <ol class="breadcrumb">
+                    <li><i class="fa fa-home"></i><a href="../../index.html">Home</a></li>
+                    <li><i class="icon_document_alt"></i>Clientes</li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                       Listado de clientes
+                    </header>
+                    <div class="panel-body">
+                        <table class="table">
+                            <thead>
+                                <tr><th class="text-center">ID</th><th>Nit</th><th>Nombre</th><th>Email</th><th><span ng-class='text-success' ><i class="icon-edit-l" ></i></span></th><th><a ng-href="#/clientes/edit" ng-click="addCliente()" ><span ng-class='text-success'><i class="icon_plus" ></i></span></a></th><th><span ><i class="icon_close_alt2" ></i></span></th></tr>
+                            </thead>
+                          <tbody>
+                            <!--<tr ng-repeat="proyecto in proyectos"><td><span ng-class="{'text-success':proyecto.estado == 'N'}"><i class="fa fa-flag"></i></span></td><td>{{proyecto.id}}</td><td>{{proyecto.nombre}}</td><td>{{proyecto.descripcion}}</td><td><button type="button" class="btn btn-default" ng-click="editProyecto(proyecto)" ><span ng-class="{'text-success':proyecto.estado == 'N'}" ><i class="glyphicon glyphicon-edit" ><</i></span></button></td></tr>-->
+                            <tr ng-repeat="cliente in clientes">
+                                <td>{{cliente.id}}</td>
+                                <td>{{cliente.nit}}</td>
+                                <td>{{cliente.nombre}}</td>
+                                <td>{{cliente.email}}</td>
+                                <td><a ng-click="editCliente(cliente)" ><span ng-class="text-success" ><i class="icon-edit-l" ></i></span></a></td>
+                                <td><a ng-click="addCliente()" ><span ng-class='text-success'><i class="icon_plus" ></i></span></a></td>
+                                <td><a ng-click="delCliente($event,cliente)" ><span ><i class="icon_close_alt2" ></i></span></a></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <!-- page end-->
+    </section>
+</section>

@@ -1,0 +1,66 @@
+<section id="main-content" ng-controller="costeosCtrl">
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="page-header"><i class="fa fa-file-text-o"></i> Costeo </h3>
+                <ol class="breadcrumb">
+                    <li><i class="fa fa-home"></i><a href="../../index.html">Home</a></li>
+                    <li><i class="icon_document_alt"></i>Costeos</li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                      Costeo Elementos
+                    </header>
+                    <div class="panel-body">
+                        <div ng-controller="costeosCtrl">
+                            <ng-form class="form-horizontal" ng-action="#/costeos">
+                                <div class="form-group">
+                                  <label class="control-label col-sm-2" for="tipo">Categria:</label>
+                                  <div class="col-sm-4">
+                                      <select name="catId" ng-model="filtro.catId" ng-options="categoria.id as categoria.nombre for categoria in categorias" ng-change ="buscaElementos(filtro.catId)">
+                                      </select>
+                                  </div>
+                              </div>
+                              <div class="form-group">
+                                <label class="control-label col-sm-2" for="tipo">Elemento:</label>
+                                <div class="col-sm-4">
+                                    <select name="elmId" ng-model="filtro.elmId" ng-options="elemento.id as elemento.nombre for elemento in elementos">
+                                    </select>
+                                </div>
+                            </div>
+                                  <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-1">
+                                      <button type="submit" class="btn btn-default" ng-click="buscaCosteos()">Ver costeos</button>
+                                    </div>
+                                    <div class="col-sm-offset-2 col-sm-1">
+                                      <button type="submit" class="btn btn-default" ng-click="crearCosteo()">Nuevo Costeo</button>
+                                    </div>
+                                  </div>
+                           </ng-form>
+                           <div class="table-responsive" >
+                             <table class="table">
+                                 <thead>
+                                     <tr><th></th><th>Fecha</th><th>Valor</th>
+                                     </tr>
+                                 </thead>
+                               <tbody>
+                                 <tr ng-repeat="costeo in costeos">
+                                     <td></td>
+                                     <td>{{costeo.effdt}}</td>
+                                     <td>{{costeo.valor}}</td>
+                                 </tr>
+                               </tbody>
+                             </table>
+                           </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <!-- page end-->
+    </section>
+</section>
