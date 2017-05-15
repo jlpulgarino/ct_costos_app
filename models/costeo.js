@@ -52,7 +52,7 @@ module.exports = function(sequelize, DataTypes) {
                 db = dbP;
                 db.Costeo.belongsTo(db.Cliente);
                 db.Costeo.belongsTo(db.Proceso);
-                /*db.Costeo.hasMany(db.Categoriaproceso);*/
+                db.Costeo.hasMany(db.Elementocosteo);
             },
             save: function(model) {
                 return db.Costeo.findById(model.id).then(function(modelAnt) {

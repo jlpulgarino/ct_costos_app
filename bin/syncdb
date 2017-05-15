@@ -41,7 +41,9 @@ function generateData() {
     }).then(function() {
         return db.Proceso.create({
             nombre: "Proceso A",
-            descripcion: "Proceso A"
+            descripcion: "Proceso A",
+            impuesto: 14,
+            indirecto: 8
         });
     });
 

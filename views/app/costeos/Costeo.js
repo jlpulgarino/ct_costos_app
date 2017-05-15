@@ -27,6 +27,10 @@
             return Http.get('elementos/'+costeoId+'/costeos');
         };
 
+        self.saveElmnCosteo = function(costeo) {
+            return Http.post('elementoscosteos/', costeo);
+        };
+
 
     });
 })();

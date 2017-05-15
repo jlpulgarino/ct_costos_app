@@ -151,7 +151,9 @@ angular.module("app").controller('editProcesosCtrl', function($rootScope, $scope
         var procesoTmp = {
             id: $scope.proceso.id,
             nombre: $scope.proceso.nombre,
-            descripcion: $scope.proceso.descripcion
+            descripcion: $scope.proceso.descripcion,
+            indirecto: $scope.proceso.indirecto,
+            impuesto: $scope.proceso.impuesto
         };
         $scope.promise = Proceso.save(procesoTmp).then(function() {
             $location.path('/procesos');

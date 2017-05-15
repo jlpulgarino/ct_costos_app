@@ -19,7 +19,7 @@
  * Se declara el modulo de la aplicacion y sus dependencias
  * @type {angular.Module}
  */
-var app = angular.module('app', ['ngRoute', 'ngMaterial', 'ui.ace', 'ui.router', 'angularResizable', 'ngFileUpload','treeGrid']);
+var app = angular.module('app', ['ngRoute', 'ngMaterial', 'ui.ace', 'ui.router', 'angularResizable', 'ngFileUpload','treeGrid','simpleGrid']);
 
 /**
  * Configuracion del modulo de la aplicacion

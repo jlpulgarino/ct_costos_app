@@ -24,6 +24,16 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.STRING(100),
             field: 'descripcion',
             allowNull: true
+        },
+        indirecto: {
+            type: DataTypes.DECIMAL(10, 2),
+            field: 'costoIni1',
+            allowNull: false
+        },
+        impuesto: {
+            type: DataTypes.DECIMAL(10, 2),
+            field: 'costoIni2',
+            allowNull: false
         }
     }, {
         timestamps: true,

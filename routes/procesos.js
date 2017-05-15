@@ -43,8 +43,10 @@ router.post('/', function(req, res, next) {
     var data = utils.getterFromPost(req);
     var categoriaEmulado = {
         id: data.get('id'),
-        nombre: data.get('nombre', 'Debe seleccionar un nombre para la proceso.'),
-        descripcion: data.get('descripcion', 'Debe digiitar una descripcion para la proceso.'),
+        nombre: data.get('nombre', 'Debe seleccionar un nombre para el proceso.'),
+        descripcion: data.get('descripcion', 'Debe digiitar una descripcion para el proceso.'),
+        indirecto: data.get('indirecto', 'Debe digiitar un indirecto para el proceso.'),
+        impuesto: data.get('impuesto', 'Debe digiitar un impuesto para el proceso.')
 
     };
 
@@ -85,6 +87,7 @@ router.get('/:id/categoriasAll', function(req, res, next) {
                             ProcesoId: categoria.ProcesoId,
                             CategoriumId: categoria.CategoriumId,
                             categoriaNbr: categoria.Categorium.nombre,
+                            tipo: categoria.Categorium.tipo,
                             elementos: categoria.Elementoprocesos.map(elemento => {
                                 return Object.assign({}, {
                                     id: elemento.id,
