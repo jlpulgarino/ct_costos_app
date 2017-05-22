@@ -31,6 +31,9 @@
             return Http.post('elementoscosteos/', costeo);
         };
 
+        self.getCostoElm = function(elmPrcId) {
+            return Http.get('elementosprocesos/costo/'+elmPrcId);
+        };
 
     });
 })();

@@ -58,6 +58,7 @@ angular.module("app").controller('editCosteosCtrl', function($rootScope, $scope,
                 $scope.clientes = clientes;
                 $scope.myData = [];
                 $scope.myData2 = [];
+                $scope.myData3 = [];
                 $scope.myGridConfig = {
                     // should return your data (an array)
                     getData: function() {
@@ -103,10 +104,6 @@ angular.module("app").controller('editCosteosCtrl', function($rootScope, $scope,
                             "field": "costoReal1",
                             "inputType": "number",
                             "$title": "CostoReal1"
-                        }, {
-                            "field": "costoReal2",
-                            "inputType": "number",
-                            "$title": "CostoReal2"
                         }]
                     }
                 };
@@ -155,10 +152,54 @@ angular.module("app").controller('editCosteosCtrl', function($rootScope, $scope,
                             "field": "costoReal1",
                             "inputType": "number",
                             "$title": "CostoReal1"
+                        }]
+                    }
+                };
+                $scope.myGridConfig3 = {
+                    // should return your data (an array)
+                    getData: function() {
+                        return $scope.myData3;
+                    },
+
+                    options: {
+                        "showEditButton": false,
+                        "editable": false,
+                        "disabled": true,
+                        "perRowEditModeEnabled": false,
+                        "pageSize": 5,
+                        "pageNum": 0,
+                        "dynamicColumns": true,
+                        "columns": [{
+                            "field": "categoria",
+                            "required": true,
+                            "disabled": true,
+                            "$title": "Categoria"
                         }, {
-                            "field": "costoReal2",
+                            "field": "elemento",
+                            "required": true,
+                            "disabled": true,
+                            "$title": "Elemento"
+                        }, {
+                            "field": "costoIni1",
                             "inputType": "number",
-                            "$title": "CostoReal2"
+                            "$title": "CostoIni1"
+                        }, {
+                            "field": "costoIni2",
+                            "inputType": "number",
+                            "disabled": false,
+                            "$title": "CostoIni2"
+                        }, {
+                            "field": "costoCmrc1",
+                            "inputType": "number",
+                            "$title": "CostoCmrc1"
+                        }, {
+                            "field": "costoCmrc2",
+                            "inputType": "number",
+                            "$title": "CostoCmrc2"
+                        }, {
+                            "field": "costoReal",
+                            "inputType": "number",
+                            "$title": "CostoReal1"
                         }]
                     }
                 };
@@ -230,6 +271,7 @@ angular.module("app").controller('editCosteosCtrl', function($rootScope, $scope,
         Proceso.categoriasAll(idProceso).then(function(procesos) {
             var data = [];
             var data2 = [];
+            var data3 = [];
             if (procesos.length > 0) {
                 for (var i = 0; i < procesos[0].categorias.length; i++) {
                     for (var j = 0; j < procesos[0].categorias[i].elementos.length; j++) {
@@ -245,13 +287,88 @@ angular.module("app").controller('editCosteosCtrl', function($rootScope, $scope,
                         }
                     }
                 }
+                var totales = {
+                    categoria: 'Totales'
+                };
+                data3.push(totales);
             }
             $scope.myData = data;
             $scope.myData2 = data2;
+            $scope.myData3 = data3;
             console.log(procesos);
         });
 
     }
+
+    $scope.calcular = function(tipo, unidad, valor) {
+        var valorCalc = 0;
+        switch (tipo) {
+            case "M":
+                valorCalc = valor * unidad;
+                break;
+            case "D":
+                if (unidad > 0) {
+                    valorCalc = valor / unidad;
+                }
+                break;
+            case "A":
+                if (unidad > 0) {
+                    valorCalc = valor / unidad;
+                }
+                break;
+            case "F":
+                valorCalc = valor;
+                break;
+        };
+
+        return valorCalc;
+    }
+
+    $scope.Actualizar = function(idProceso) {
+
+        Costeo.getCostoElm(idProceso).then(function(elementos) {
+            var unidad1 = $scope.costeo.unidad1;
+            var unidad2 = $scope.costeo.unidad2;
+            var unidad3 = $scope.costeo.unidad3;
+            var unidad4 = $scope.costeo.unidad4;
+            var data = $scope.myData;
+            var data2 = $scope.myData2;
+            var data3 = $scope.myData3;
+            data3[0].costoIni1 =  0;
+            data3[0].costoIni2 =  0;
+            data3[0].costoCmrc1 = 0;
+            data3[0].costoCmrc2 = 0;
+            data3[0].costoReal1 = 0;
+            for (var j = 0; j < elementos.length; j++) {
+                for (var i = 0; i < data.length; i++) {
+                    if (elementos[j].id == data[i].elemento[0]) {
+                        data[i].costoIni1 = $scope.calcular(elementos[j].tipo, unidad1, elementos[j].valor);
+                        data[i].costoIni2 = $scope.calcular(elementos[j].tipo, unidad2, elementos[j].valor);
+                        data3[0].costoIni1 = parseFloat(data3[0].costoIni1) + parseFloat(data[i].costoIni1);
+                        data3[0].costoIni2 = parseFloat(data3[0].costoIni2) + parseFloat(data[i].costoIni2);
+                        data3[0].costoCmrc1 = parseFloat(data3[0].costoCmrc1) + parseFloat(data[i].costoCmrc1);
+                        data3[0].costoCmrc2 = parseFloat(data3[0].costoCmrc2) + parseFloat(data[i].costoCmrc2);
+                        data3[0].costoReal1 = parseFloat(data3[0].costoReal1) + parseFloat(data[i].costoReal1);
+
+                    }
+                }
+                for (i = 0; i < data2.length; i++) {
+                    if (elementos[j].id == data2[i].elemento[0]) {
+                        data2[i].costoIni1 = $scope.calcular(elementos[j].tipo, unidad1, elementos[j].valor);
+                        data2[i].costoIni2 = $scope.calcular(elementos[j].tipo, unidad2, elementos[j].valor);
+                        data3[0].costoIni1 = parseFloat(data3[0].costoIni1) + parseFloat(data2[i].costoIni1);
+                        data3[0].costoIni2 = parseFloat(data3[0].costoIni2) + parseFloat(data2[i].costoIni2);
+                        data3[0].costoCmrc1 = parseFloat(data3[0].costoCmrc1) + parseFloat(data2[i].costoCmrc1);
+                        data3[0].costoCmrc2 = parseFloat(data3[0].costoCmrc2) + parseFloat(data2[i].costoCmrc2);
+                        data3[0].costoReal1 = parseFloat(data3[0].costoReal1) + parseFloat(data2[i].costoReal1);
+                    }
+                }
+
+            }
+        });
+
+    }
+
 
     $scope.cargarCosteos = function(el) {}
 

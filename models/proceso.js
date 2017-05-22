@@ -27,12 +27,12 @@ module.exports = function(sequelize, DataTypes) {
         },
         indirecto: {
             type: DataTypes.DECIMAL(10, 2),
-            field: 'costoIni1',
+            field: 'indirecto',
             allowNull: false
         },
         impuesto: {
             type: DataTypes.DECIMAL(10, 2),
-            field: 'costoIni2',
+            field: 'impuesto',
             allowNull: false
         }
     }, {

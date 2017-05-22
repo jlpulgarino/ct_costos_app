@@ -27,7 +27,7 @@ module.exports = function(sequelize, DataTypes) {
         },
         tipo: {
             type: DataTypes.STRING(1),
-            field: 'estado',
+            field: 'tipo',
             allowNull: true
         }
     }, {

@@ -20,6 +20,12 @@ router.get('/', function(req, res, next) {
     }).catch(next);
 });
 
+router.get('/costo/:id', function(req, res, next) {
+    db.sequelize.query('SELECT * FROM public.costoelmvw where  "ProcesoId" = :idelm ',
+    { replacements: { idelm: req.params.id }}).then(function(resp) {
+        return res.send(resp[0]);
+    }).catch(next);
+});
 
 
 /**
