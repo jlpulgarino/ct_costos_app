@@ -72,10 +72,7 @@
                                     <div class="col-sm-6"> <input bled type="number" class="form-control" ng-model="costeo.unidad2" id="unidad2"> </div>
                                 </div>
                                 <div class="form-group col-sm-3"> <label class="control-label col-sm-2" for="unidad3">Und3:</label>
-                                    <div class="col-sm-6"> <input bled type="number" class="form-control" ng-model="costeo.unidad3" id="unidad3"><input type="checkbox" name="u1c"> </div>
-                                </div>
-                                <div class="form-group col-sm-3"> <label class="control-label col-sm-2" for="unidad4">Und4:</label>
-                                    <div class="col-sm-6"> <input bled type="number" class="form-control" ng-model="costeo.unidad4" id="unidad4"><input type="checkbox" name="u1c"> </div>
+                                    <div class="col-sm-6"> <input bled type="number" class="form-control" ng-model="costeo.unidad3" id="unidad3"></div>
                                 </div>
                             </div>
                             <div class="panel-body">
@@ -83,14 +80,11 @@
                                 <div simple-grid="myGridConfig"></div>
                             </div>
                             <div class="panel-body">
-                                <label class="control-label col-sm-2" for="estado">No Indirectos:</label>
+                                <span ng-class="text-success">No Indirectos:</span>
                                 <div simple-grid="myGridConfig2"></div>
                             </div>
                             <div class="panel-body">
                                 <div simple-grid="myGridConfig3"></div>
-                            </div>
-                            <div class="form-group"> <label class="control-label col-sm-2" for="costoFinal">CostoFinal:</label>
-                                <div class="col-sm-4"> <input bled type="text" class="form-control" ng-model="costeo.costoFinal" id="costoFinal" placeholder="Digite un costoFinal"> </div>
                             </div>
                             <div class="form-group"> <label class="control-label col-sm-2" for="precioVenta">PrecioVenta:</label>
                                 <div class="col-sm-4"> <input bled type="text" class="form-control" ng-model="costeo.precioVenta" id="precioVenta" placeholder="Digite un precioVenta"> </div>

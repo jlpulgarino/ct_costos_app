@@ -50,6 +50,33 @@ angular.module("app").controller('editCosteosCtrl', function($rootScope, $scope,
     refreshSb();
 
     function refreshSb() {
+        var disableInicial = false;
+        var disableComercial = false;
+        var disableReal = false;
+        console.log($rootScope.costeoIdActual);
+        if ($rootScope.costeoIdActual) {
+            switch ($rootScope.costeoIdActual.estado) {
+                case "N":
+                    disableInicial = false;
+                    disableComercial = true;
+                    disableReal = true;
+                    break;
+                case "C":
+                    disableInicial = true;
+                    disableComercial = false;
+                    disableReal = true;
+                    break;
+                case "F":
+                    disableInicial = true;
+                    disableComercial = true;
+                    disableReal = false;
+                    break;
+            }
+        } else {
+            disableInicial = false;
+            disableComercial = true;
+            disableReal = true;
+        }
 
         $scope.costeo = $rootScope.costeoIdActual;
         Proceso.getAll().then(function(procesos) {
@@ -85,23 +112,37 @@ angular.module("app").controller('editCosteosCtrl', function($rootScope, $scope,
                             "$title": "Elemento"
                         }, {
                             "field": "costoIni1",
+                            "disabled": disableInicial,
                             "inputType": "number",
                             "$title": "CostoIni1"
                         }, {
                             "field": "costoIni2",
+                            "disabled": disableInicial,
                             "inputType": "number",
-                            "disabled": false,
                             "$title": "CostoIni2"
                         }, {
+                            "field": "costoIni3",
+                            "inputType": "number",
+                            "disabled": disableInicial,
+                            "$title": "CostoIni3"
+                        }, {
                             "field": "costoCmrc1",
+                            "disabled": disableComercial,
                             "inputType": "number",
                             "$title": "CostoCmrc1"
                         }, {
                             "field": "costoCmrc2",
+                            "disabled": disableComercial,
                             "inputType": "number",
                             "$title": "CostoCmrc2"
                         }, {
+                            "field": "costoCmrc3",
+                            "disabled": disableComercial,
+                            "inputType": "number",
+                            "$title": "CostoCmrc3"
+                        }, {
                             "field": "costoReal1",
+                            "disabled": disableReal,
                             "inputType": "number",
                             "$title": "CostoReal1"
                         }]
@@ -133,23 +174,37 @@ angular.module("app").controller('editCosteosCtrl', function($rootScope, $scope,
                             "$title": "Elemento"
                         }, {
                             "field": "costoIni1",
+                            "disabled": disableInicial,
                             "inputType": "number",
                             "$title": "CostoIni1"
                         }, {
                             "field": "costoIni2",
                             "inputType": "number",
-                            "disabled": false,
+                            "disabled": disableInicial,
                             "$title": "CostoIni2"
                         }, {
+                            "field": "costoIni3",
+                            "inputType": "number",
+                            "disabled": disableInicial,
+                            "$title": "CostoIni3"
+                        }, {
                             "field": "costoCmrc1",
+                            "disabled": disableComercial,
                             "inputType": "number",
                             "$title": "CostoCmrc1"
                         }, {
                             "field": "costoCmrc2",
+                            "disabled": disableComercial,
                             "inputType": "number",
                             "$title": "CostoCmrc2"
                         }, {
+                            "field": "costoCmrc3",
+                            "disabled": disableComercial,
+                            "inputType": "number",
+                            "$title": "CostoCmrc3"
+                        }, {
                             "field": "costoReal1",
+                            "disabled": disableReal,
                             "inputType": "number",
                             "$title": "CostoReal1"
                         }]
@@ -181,23 +236,37 @@ angular.module("app").controller('editCosteosCtrl', function($rootScope, $scope,
                             "$title": "Elemento"
                         }, {
                             "field": "costoIni1",
+                            "disabled": true,
                             "inputType": "number",
                             "$title": "CostoIni1"
                         }, {
                             "field": "costoIni2",
+                            "disabled": true,
                             "inputType": "number",
-                            "disabled": false,
                             "$title": "CostoIni2"
                         }, {
+                            "field": "costoIni3",
+                            "disabled": true,
+                            "inputType": "number",
+                            "$title": "CostoIni3"
+                        }, {
                             "field": "costoCmrc1",
+                            "disabled": true,
                             "inputType": "number",
                             "$title": "CostoCmrc1"
                         }, {
                             "field": "costoCmrc2",
+                            "disabled": true,
                             "inputType": "number",
                             "$title": "CostoCmrc2"
                         }, {
+                            "field": "costoCmrc3",
+                            "disabled": true,
+                            "inputType": "number",
+                            "$title": "CostoCmrc3"
+                        }, {
                             "field": "costoReal",
+                            "disabled": true,
                             "inputType": "number",
                             "$title": "CostoReal1"
                         }]
@@ -217,7 +286,12 @@ angular.module("app").controller('editCosteosCtrl', function($rootScope, $scope,
             nombre: $scope.costeo.nombre,
             requerimiento: $scope.costeo.requerimiento,
             estado: $scope.costeo.estado,
-            costoFinal: $scope.costeo.costoFinal,
+            unidad1: $scope.costeo.unidad1,
+            unidad2: $scope.costeo.unidad2,
+            unidad3: $scope.costeo.unidad3,
+            costoFinal1: $scope.costeo.costoFinal1,
+            costoFinal2: $scope.costeo.costoFinal2,
+            costoFinal3: $scope.costeo.costoFinal3,
             precioVenta: $scope.costeo.precioVenta,
             nota: $scope.costeo.nota,
             ClienteId: $scope.costeo.ClienteId,
@@ -234,10 +308,11 @@ angular.module("app").controller('editCosteosCtrl', function($rootScope, $scope,
                     id: data[i].id,
                     costoIni1: data[i].costoIni1,
                     costoIni2: data[i].costoIni2,
+                    costoIni3: data[i].costoIni3,
                     costoCmrc1: data[i].costoCmrc1,
                     costoCmrc2: data[i].costoCmrc2,
+                    costoCmrc3: data[i].costoCmrc3,
                     costoReal1: data[i].costoReal1,
-                    costoReal2: data[i].costoReal2,
                     CosteoId: costeo.id,
                     ElementoprocesoId: elmentoId[0]
                 };
@@ -251,10 +326,11 @@ angular.module("app").controller('editCosteosCtrl', function($rootScope, $scope,
                     id: data[i].id,
                     costoIni1: data[i].costoIni1,
                     costoIni2: data[i].costoIni2,
+                    costoIni3: data[i].costoIni3,
                     costoCmrc1: data[i].costoCmrc1,
                     costoCmrc2: data[i].costoCmrc2,
+                    costoCmrc3: data[i].costoCmrc3,
                     costoReal1: data[i].costoReal1,
-                    costoReal2: data[i].costoReal2,
                     CosteoId: costeo.id,
                     ElementoprocesoId: elmentoId[0]
                 };
@@ -279,7 +355,6 @@ angular.module("app").controller('editCosteosCtrl', function($rootScope, $scope,
                             categoria: '' + procesos[0].categorias[i].id + '|' + procesos[0].categorias[i].categoriaNbr,
                             elemento: '' + procesos[0].categorias[i].elementos[j].id + '|' + procesos[0].categorias[i].elementos[j].elemmentoNbr
                         };
-                        console.log(procesos[0].categorias[i].categoriaNbr);
                         if (procesos[0].categorias[i].tipo == 'Y') {
                             data.push(elemnt);
                         } else {
@@ -308,12 +383,12 @@ angular.module("app").controller('editCosteosCtrl', function($rootScope, $scope,
                 break;
             case "D":
                 if (unidad > 0) {
-                    valorCalc = valor / unidad;
+                    valorCalc = Number((valor / unidad).toFixed(2));
                 }
                 break;
             case "A":
                 if (unidad > 0) {
-                    valorCalc = valor / unidad;
+                    valorCalc = Number((valor / unidad).toFixed(2));
                 }
                 break;
             case "F":
@@ -334,20 +409,25 @@ angular.module("app").controller('editCosteosCtrl', function($rootScope, $scope,
             var data = $scope.myData;
             var data2 = $scope.myData2;
             var data3 = $scope.myData3;
-            data3[0].costoIni1 =  0;
-            data3[0].costoIni2 =  0;
+            data3[0].costoIni1 = 0;
+            data3[0].costoIni2 = 0;
+            data3[0].costoIni3 = 0;
             data3[0].costoCmrc1 = 0;
             data3[0].costoCmrc2 = 0;
+            data3[0].costoCmrc3 = 0;
             data3[0].costoReal1 = 0;
             for (var j = 0; j < elementos.length; j++) {
                 for (var i = 0; i < data.length; i++) {
                     if (elementos[j].id == data[i].elemento[0]) {
                         data[i].costoIni1 = $scope.calcular(elementos[j].tipo, unidad1, elementos[j].valor);
                         data[i].costoIni2 = $scope.calcular(elementos[j].tipo, unidad2, elementos[j].valor);
+                        data[i].costoIni3 = $scope.calcular(elementos[j].tipo, unidad3, elementos[j].valor);
                         data3[0].costoIni1 = parseFloat(data3[0].costoIni1) + parseFloat(data[i].costoIni1);
                         data3[0].costoIni2 = parseFloat(data3[0].costoIni2) + parseFloat(data[i].costoIni2);
+                        data3[0].costoIni3 = parseFloat(data3[0].costoIni3) + parseFloat(data[i].costoIni3);
                         data3[0].costoCmrc1 = parseFloat(data3[0].costoCmrc1) + parseFloat(data[i].costoCmrc1);
                         data3[0].costoCmrc2 = parseFloat(data3[0].costoCmrc2) + parseFloat(data[i].costoCmrc2);
+                        data3[0].costoCmrc3 = parseFloat(data3[0].costoCmrc3) + parseFloat(data[i].costoCmrc3);
                         data3[0].costoReal1 = parseFloat(data3[0].costoReal1) + parseFloat(data[i].costoReal1);
 
                     }
@@ -356,16 +436,33 @@ angular.module("app").controller('editCosteosCtrl', function($rootScope, $scope,
                     if (elementos[j].id == data2[i].elemento[0]) {
                         data2[i].costoIni1 = $scope.calcular(elementos[j].tipo, unidad1, elementos[j].valor);
                         data2[i].costoIni2 = $scope.calcular(elementos[j].tipo, unidad2, elementos[j].valor);
+                        data2[i].costoIni3 = $scope.calcular(elementos[j].tipo, unidad3, elementos[j].valor);
                         data3[0].costoIni1 = parseFloat(data3[0].costoIni1) + parseFloat(data2[i].costoIni1);
                         data3[0].costoIni2 = parseFloat(data3[0].costoIni2) + parseFloat(data2[i].costoIni2);
+                        data3[0].costoIni3 = parseFloat(data3[0].costoIni3) + parseFloat(data2[i].costoIni3);
                         data3[0].costoCmrc1 = parseFloat(data3[0].costoCmrc1) + parseFloat(data2[i].costoCmrc1);
                         data3[0].costoCmrc2 = parseFloat(data3[0].costoCmrc2) + parseFloat(data2[i].costoCmrc2);
+                        data3[0].costoCmrc3 = parseFloat(data3[0].costoCmrc3) + parseFloat(data2[i].costoCmrc3);
                         data3[0].costoReal1 = parseFloat(data3[0].costoReal1) + parseFloat(data2[i].costoReal1);
                     }
                 }
 
             }
         });
+
+    }
+
+    $scope.mostrarColumna = function(numCol) {
+        switch (numCol) {
+            case 3:
+                valorCalc = valor * unidad;
+                break;
+            case 4:
+                if (unidad > 0) {
+                    valorCalc = Number((valor / unidad).toFixed(2));
+                }
+                break;
+        }
 
     }
 

@@ -25,6 +25,11 @@ module.exports = function(sequelize, DataTypes) {
             field: 'costoIni2',
             allowNull: false
         },
+        costoIni3: {
+            type: DataTypes.DECIMAL(10, 2),
+            field: 'costoIni3',
+            allowNull: false
+        },
         costoCmrc1: {
             type: DataTypes.DECIMAL(10, 2),
             field: 'costoCmrc1',
@@ -35,14 +40,14 @@ module.exports = function(sequelize, DataTypes) {
             field: 'costoCmrc2',
             allowNull: true
         },
+        costoCmrc3: {
+            type: DataTypes.DECIMAL(10, 2),
+            field: 'costoCmrc3',
+            allowNull: true
+        },
         costoReal1: {
             type: DataTypes.DECIMAL(10, 2),
             field: 'costoReal1',
-            allowNull: true
-        },
-        costoReal2: {
-            type: DataTypes.DECIMAL(10, 2),
-            field: 'costoReal2',
             allowNull: true
         },
         unidades: {

@@ -30,9 +30,34 @@ module.exports = function(sequelize, DataTypes) {
             field: 'estado',
             allowNull: false
         },
-        costoFinal: {
+        unidad1: {
             type: DataTypes.DECIMAL(10, 2),
-            field: 'costoFinal',
+            field: 'unidad1',
+            allowNull: false
+        },
+        unidad2: {
+            type: DataTypes.DECIMAL(10, 2),
+            field: 'unidad2',
+            allowNull: false
+        },
+        unidad3: {
+            type: DataTypes.DECIMAL(10, 2),
+            field: 'unidad3',
+            allowNull: false
+        },
+        costoFinal1: {
+            type: DataTypes.DECIMAL(10, 2),
+            field: 'costoFinal1',
+            allowNull: false
+        },
+        costoFinal2: {
+            type: DataTypes.DECIMAL(10, 2),
+            field: 'costoFinal2',
+            allowNull: false
+        },
+        costoFinal3: {
+            type: DataTypes.DECIMAL(10, 2),
+            field: 'costoFinal3',
             allowNull: false
         },
         precioVenta: {

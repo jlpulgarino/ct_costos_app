@@ -46,9 +46,14 @@ router.post('/', function(req, res, next) {
         nombre: data.get('nombre', 'Debe seleccionar un nombre para el costeo.'),
         requerimiento: data.get('requerimiento', 'Debe seleccionar un requerimiento para el costeo.'),
         estado: data.get('estado', 'Debe seleccionar un estado para el costeo.'),
-        costoFinal: data.get('costoFinal', 'Debe seleccionar un costoFinal para el costeo.'),
-        precioVenta: data.get('precioVenta', 'Debe seleccionar un precioVenta para el costeo.'),
-        nota: data.get('nota', 'Debe seleccionar un nota para el costeo.'),
+        unidad1: data.get('unidad1', 'Debe seleccionar un unidad1 para el costeo.'),
+        unidad2: data.get('unidad2', 'Debe seleccionar un unidad2 para el costeo.'),
+        unidad3: data.get('unidad3'),
+        costoFinal1: data.get('costoFinal1'),
+        costoFinal2: data.get('costoFinal2'),
+        costoFinal3: data.get('costoFinal3'),
+        precioVenta: data.get('precioVenta'),
+        nota: data.get('nota'),
         ClienteId: data.get('ClienteId', 'Debe seleccionar un ClienteId para el costeo.'),
         ProcesoId: data.get('ProcesoId', 'Debe seleccionar un ProcesoId para el costeo.')
     };

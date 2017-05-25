@@ -46,10 +46,11 @@ router.post('/', function(req, res, next) {
         id: data.get('id'),
         costoIni1: data.get('costoIni1', 'Debe ingresar una costoIni1 de costeo'),
         costoIni2: data.get('costoIni2', 'Debe ingresar una costoIni2 de costeo'),
+        costoIni3: data.get('costoIni3', 'Debe ingresar una costoIni2 de costeo'),
         costoCmrc1: data.get('costoCmrc1'),
         costoCmrc2: data.get('costoCmrc2'),
+        costoCmrc3: data.get('costoCmrc3'),
         costoReal1: data.get('costoReal1'),
-        costoReal2: data.get('costoReal2'),
         CosteoId: data.get('CosteoId', 'Debe ingresar una CosteoId de costeo'),
         ElementoprocesoId: data.get('ElementoprocesoId', 'Debe ingresar una ElementoprocesoId de costeo')
     };
