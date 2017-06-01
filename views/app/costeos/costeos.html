@@ -17,7 +17,7 @@
                     </header>
                     <div class="panel-body">
                         <div ng-controller="costeosCtrl">
-                            <ng-form class="form-horizontal" ng-action="#/costeos">
+                            <!--<ng-form class="form-horizontal" ng-action="#/costeos">
                                 <div class="form-group">
                                   <label class="control-label col-sm-2" for="tipo">Categria:</label>
                                   <div class="col-sm-4">
@@ -40,18 +40,18 @@
                                       <button type="submit" class="btn btn-default" ng-click="crearCosteo()">Nuevo Costeo</button>
                                     </div>
                                   </div>
-                           </ng-form>
+                           </ng-form>-->
                            <div class="table-responsive" >
                              <table class="table">
                                  <thead>
-                                     <tr><th></th><th>Fecha</th><th>Valor</th>
+                                     <tr><th></th><th>Nombre</th><th>Requerimiento</th>
                                      </tr>
                                  </thead>
                                <tbody>
                                  <tr ng-repeat="costeo in costeos">
                                      <td></td>
-                                     <td>{{costeo.effdt}}</td>
-                                     <td>{{costeo.valor}}</td>
+                                     <td>{{costeo.nombre}}</td>
+                                     <td>{{costeo.requerimiento}}</td>
                                  </tr>
                                </tbody>
                              </table>
