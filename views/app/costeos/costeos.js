@@ -111,6 +111,11 @@ angular.module("app").controller('editCosteosCtrl', function($rootScope, $scope,
                             "disabled": true,
                             "$title": "Elemento"
                         }, {
+                            "field": "valor",
+                            "disabled": false,
+                            "inputType": "number",
+                            "$title": "Valor"
+                        }, {
                             "field": "costoIni1",
                             "disabled": disableInicial,
                             "inputType": "number",
@@ -172,6 +177,11 @@ angular.module("app").controller('editCosteosCtrl', function($rootScope, $scope,
                             "required": true,
                             "disabled": true,
                             "$title": "Elemento"
+                        }, {
+                            "field": "valor",
+                            "disabled": false,
+                            "inputType": "number",
+                            "$title": "Valor"
                         }, {
                             "field": "costoIni1",
                             "disabled": disableInicial,
@@ -235,6 +245,11 @@ angular.module("app").controller('editCosteosCtrl', function($rootScope, $scope,
                             "disabled": true,
                             "$title": "Elemento"
                         }, {
+                            "field": "valor",
+                            "disabled": false,
+                            "inputType": "number",
+                            "$title": "Valor"
+                        }, {
                             "field": "costoIni1",
                             "disabled": true,
                             "inputType": "number",
@@ -280,6 +295,7 @@ angular.module("app").controller('editCosteosCtrl', function($rootScope, $scope,
     }
 
     $scope.guardarCosteo = function() {
+        var data3 = $scope.myData3;
 
         var costeoTmp = {
             id: $scope.costeo.id,
@@ -289,9 +305,13 @@ angular.module("app").controller('editCosteosCtrl', function($rootScope, $scope,
             unidad1: $scope.costeo.unidad1,
             unidad2: $scope.costeo.unidad2,
             unidad3: $scope.costeo.unidad3,
-            costoFinal1: $scope.costeo.costoFinal1,
-            costoFinal2: $scope.costeo.costoFinal2,
-            costoFinal3: $scope.costeo.costoFinal3,
+            totalI1: data3[0].costoIni1,
+            totalI2: data3[0].costoIni2,
+            totalI3: data3[0].costoIni3,
+            totalC1: data3[0].costoCmrc1,
+            totalC2: data3[0].costoCmrc2,
+            totalC3: data3[0].costoCmrc3,
+            totalCR: data3[0].costoReal1,
             precioVenta: $scope.costeo.precioVenta,
             nota: $scope.costeo.nota,
             ClienteId: $scope.costeo.ClienteId,
@@ -306,6 +326,7 @@ angular.module("app").controller('editCosteosCtrl', function($rootScope, $scope,
                 var elmentoId = data[i].elemento;
                 elmcosteoTmp = {
                     id: data[i].id,
+                    valor: data[i].valor,
                     costoIni1: data[i].costoIni1,
                     costoIni2: data[i].costoIni2,
                     costoIni3: data[i].costoIni3,
@@ -324,6 +345,7 @@ angular.module("app").controller('editCosteosCtrl', function($rootScope, $scope,
                 elmentoId = data[i].elemento;
                 elmcosteoTmp = {
                     id: data[i].id,
+                    valor: data[i].valor,
                     costoIni1: data[i].costoIni1,
                     costoIni2: data[i].costoIni2,
                     costoIni3: data[i].costoIni3,
@@ -375,7 +397,7 @@ angular.module("app").controller('editCosteosCtrl', function($rootScope, $scope,
 
     }
 
-    $scope.calcular = function(tipo, unidad, valor) {
+    $scope.calcular = function(tipo, unidad, costo, valor) {
         var valorCalc = 0;
         switch (tipo) {
             case "M":
@@ -383,7 +405,7 @@ angular.module("app").controller('editCosteosCtrl', function($rootScope, $scope,
                 break;
             case "D":
                 if (unidad > 0) {
-                    valorCalc = Number((valor / unidad).toFixed(2));
+                    valorCalc = Number((costo / unidad).toFixed(2));
                 }
                 break;
             case "A":
@@ -392,7 +414,7 @@ angular.module("app").controller('editCosteosCtrl', function($rootScope, $scope,
                 }
                 break;
             case "F":
-                valorCalc = valor;
+                valorCalc = costo;
                 break;
         };
 
@@ -419,9 +441,9 @@ angular.module("app").controller('editCosteosCtrl', function($rootScope, $scope,
             for (var j = 0; j < elementos.length; j++) {
                 for (var i = 0; i < data.length; i++) {
                     if (elementos[j].id == data[i].elemento[0]) {
-                        data[i].costoIni1 = $scope.calcular(elementos[j].tipo, unidad1, elementos[j].valor);
-                        data[i].costoIni2 = $scope.calcular(elementos[j].tipo, unidad2, elementos[j].valor);
-                        data[i].costoIni3 = $scope.calcular(elementos[j].tipo, unidad3, elementos[j].valor);
+                        data[i].costoIni1 = $scope.calcular(elementos[j].tipo, unidad1, elementos[j].valor, data[i].valor);
+                        data[i].costoIni2 = $scope.calcular(elementos[j].tipo, unidad2, elementos[j].valor, data[i].valor);
+                        data[i].costoIni3 = $scope.calcular(elementos[j].tipo, unidad3, elementos[j].valor, data[i].valor);
                         data3[0].costoIni1 = parseFloat(data3[0].costoIni1) + parseFloat(data[i].costoIni1);
                         data3[0].costoIni2 = parseFloat(data3[0].costoIni2) + parseFloat(data[i].costoIni2);
                         data3[0].costoIni3 = parseFloat(data3[0].costoIni3) + parseFloat(data[i].costoIni3);
@@ -434,9 +456,9 @@ angular.module("app").controller('editCosteosCtrl', function($rootScope, $scope,
                 }
                 for (i = 0; i < data2.length; i++) {
                     if (elementos[j].id == data2[i].elemento[0]) {
-                        data2[i].costoIni1 = $scope.calcular(elementos[j].tipo, unidad1, elementos[j].valor);
-                        data2[i].costoIni2 = $scope.calcular(elementos[j].tipo, unidad2, elementos[j].valor);
-                        data2[i].costoIni3 = $scope.calcular(elementos[j].tipo, unidad3, elementos[j].valor);
+                        data2[i].costoIni1 = $scope.calcular(elementos[j].tipo, unidad1, elementos[j].valor, data2[i].valor);
+                        data2[i].costoIni2 = $scope.calcular(elementos[j].tipo, unidad2, elementos[j].valor, data2[i].valor);
+                        data2[i].costoIni3 = $scope.calcular(elementos[j].tipo, unidad3, elementos[j].valor, data2[i].valor);
                         data3[0].costoIni1 = parseFloat(data3[0].costoIni1) + parseFloat(data2[i].costoIni1);
                         data3[0].costoIni2 = parseFloat(data3[0].costoIni2) + parseFloat(data2[i].costoIni2);
                         data3[0].costoIni3 = parseFloat(data3[0].costoIni3) + parseFloat(data2[i].costoIni3);

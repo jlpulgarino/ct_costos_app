@@ -44,9 +44,10 @@ router.post('/', function(req, res, next) {
     console.log('CosteoId:'+data.get('CosteoId'))
     var elementoEmulado = {
         id: data.get('id'),
+        valor: data.get('valor'),
         costoIni1: data.get('costoIni1', 'Debe ingresar una costoIni1 de costeo'),
         costoIni2: data.get('costoIni2', 'Debe ingresar una costoIni2 de costeo'),
-        costoIni3: data.get('costoIni3', 'Debe ingresar una costoIni2 de costeo'),
+        costoIni3: data.get('costoIni3', 'Debe ingresar una costoIni3 de costeo'),
         costoCmrc1: data.get('costoCmrc1'),
         costoCmrc2: data.get('costoCmrc2'),
         costoCmrc3: data.get('costoCmrc3'),

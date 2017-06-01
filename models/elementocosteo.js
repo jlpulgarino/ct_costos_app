@@ -15,6 +15,11 @@ module.exports = function(sequelize, DataTypes) {
             autoIncrement: true,
             primaryKey: true
         },
+        valor: {
+            type: DataTypes.DECIMAL(10, 2),
+            field: 'valor',
+            allowNull: true
+        },
         costoIni1: {
             type: DataTypes.DECIMAL(10, 2),
             field: 'costoIni1',
@@ -48,11 +53,6 @@ module.exports = function(sequelize, DataTypes) {
         costoReal1: {
             type: DataTypes.DECIMAL(10, 2),
             field: 'costoReal1',
-            allowNull: true
-        },
-        unidades: {
-            type: DataTypes.DECIMAL(10, 2),
-            field: 'unidades',
             allowNull: true
         }
     }, {

@@ -45,30 +45,50 @@ module.exports = function(sequelize, DataTypes) {
             field: 'unidad3',
             allowNull: false
         },
-        costoFinal1: {
+        totalI1: {
             type: DataTypes.DECIMAL(10, 2),
-            field: 'costoFinal1',
+            field: 'totalI1',
             allowNull: false
         },
-        costoFinal2: {
+        totalI2: {
             type: DataTypes.DECIMAL(10, 2),
-            field: 'costoFinal2',
+            field: 'totalI2',
             allowNull: false
         },
-        costoFinal3: {
+        totalI3: {
             type: DataTypes.DECIMAL(10, 2),
-            field: 'costoFinal3',
+            field: 'totalI3',
             allowNull: false
+        },
+        totalC1: {
+            type: DataTypes.DECIMAL(10, 2),
+            field: 'totalC1',
+            allowNull: true
+        },
+        totalC2: {
+            type: DataTypes.DECIMAL(10, 2),
+            field: 'totalC2',
+            allowNull: true
+        },
+        totalC3: {
+            type: DataTypes.DECIMAL(10, 2),
+            field: 'totalC3',
+            allowNull: true
+        },
+        totalCR: {
+            type: DataTypes.DECIMAL(10, 2),
+            field: 'totalCR',
+            allowNull: true
         },
         precioVenta: {
             type: DataTypes.DECIMAL(10, 2),
             field: 'precioVenta',
-            allowNull: false
+            allowNull: true
         },
         nota: {
             type: DataTypes.STRING(254),
             field: 'nota',
-            allowNull: false
+            allowNull: true
         }
     }, {
         timestamps: true,
