@@ -7,6 +7,7 @@ angular.module("app").controller('costeosCtrl', function($rootScope, $scope, $lo
 
         Costeo.getAll().then(function(costeos) {
             $scope.costeos = costeos;
+            console.log(costeos);
         });
     }
 
@@ -42,14 +43,22 @@ angular.module("app").controller('costeosCtrl', function($rootScope, $scope, $lo
 
     };
 
+    $scope.editCosteo = function(costeo){
+        $rootScope.costeoIdActual = costeo;
+        $location.path('/costeos/edit');
+    }
+
 });
 
-angular.module("app").controller('editCosteosCtrl', function($rootScope, $scope, $location, Proceso, Cliente, Costeo) {
+angular.module("app").controller('editCosteosCtrl', function($rootScope, $scope, $location, Proceso, Cliente, Costeo, Categoria) {
     console.log('CONTROLADOR_EDIT_CST');
 
     refreshSb();
 
     function refreshSb() {
+        $scope.filtro = {
+            elmId: 0
+        };
         var disableInicial = false;
         var disableComercial = false;
         var disableReal = false;
@@ -288,20 +297,109 @@ angular.module("app").controller('editCosteosCtrl', function($rootScope, $scope,
                     }
                 };
 
+                Categoria.getAllElementos().then(function(categorias) {
+                    for(var i = 0 ; i < categorias.length; i++){
+                        if(categorias[i].tipo == "Y"){
+                            categorias[i].id =  "I|"+categorias[i].id+"|"+categorias[i].nombre;
+                        }else{
+                            categorias[i].id =  "N|"+categorias[i].id+"|"+categorias[i].nombre;
+                        }
+                    }
+                    $scope.categorias = categorias;
+                });
+
 
             });
         });
 
     }
 
+    $scope.cambiaCategoria = function(par_categoriaId){
+        var elementos = [];
+        var categoriaId = par_categoriaId.split("|")[1];
+        Categoria.getAllElementos().then(function(categorias) {
+            for (var i = 0; i< categorias.length; i++){
+                if(categorias[i].id == categoriaId){
+                    for(var j = 0; j<categorias[i].elementos.length; j++){
+                        categorias[i].elementos[j].id = categorias[i].elementos[j].id+'|'+categorias[i].elementos[j].nombre;
+                        elementos.push(categorias[i].elementos[j]);
+                    }
+
+                }
+            }
+            $scope.elementos = elementos;
+        });
+
+    }
+
+    $scope.adicionarElemento = function(){
+        var data = $scope.myData;
+        var data2 = $scope.myData2;
+        var llaveCtegoria = $scope.filtro.catId.split("|");
+        var llaveElemento = $scope.filtro.elmId.split("|");
+        var idCategoria = llaveCtegoria[1];
+        var tipoCategoria = llaveCtegoria[0];
+        var nombreCategoria = llaveCtegoria[2];
+        var idElemento = llaveElemento[0];
+        var nombreElemento = llaveElemento[1];
+        var insertada = false;
+        var elemnt = {};
+        var i = 0;
+
+        if(tipoCategoria == "I"){
+            for ( i = 0; i < data.length; i++) {
+                console.log(data[i]);
+                var categoria = data[i].categoria.split("|");
+                if(categoria[0] == idCategoria){
+                    elemnt = {
+                        categoria: '' + categoria[0] + '|' + categoria[1],
+                        elemento: '' + idElemento + '|' + nombreElemento
+                    };
+                    insertada = true;
+                }
+            }
+            if(!insertada){
+                elemnt = {
+                    categoria: '' + idCategoria + '|' + nombreElemento,
+                    elemento: '' + idElemento + '|' + nombreElemento
+                };
+            }
+            data.push(elemnt);
+        }else{
+            for (i = 0; i < data2.length; i++) {
+                console.log(data2[i]);
+                var categoria = data2[i].categoria.split("|");
+                if(categoria[0] == idCategoria){
+                    elemnt = {
+                        categoria: '' + categoria[0] + '|' + categoria[1],
+                        elemento: '' + idElemento + '|' + nombreElemento
+                    };
+                    insertada = true;
+                }
+            }
+            if(!insertada){
+                elemnt = {
+                    categoria: '' + idCategoria + '|' + nombreElemento,
+                    elemento: '' + idElemento + '|' + nombreElemento
+                };
+            }
+            data2.push(elemnt);
+        }
+    }
+
+
     $scope.guardarCosteo = function() {
         var data3 = $scope.myData3;
+        var estadoId = $scope.costeo.estado;
+        if(!estadoId){
+            estadoId = "N";
+        }
 
         var costeoTmp = {
             id: $scope.costeo.id,
             nombre: $scope.costeo.nombre,
             requerimiento: $scope.costeo.requerimiento,
-            estado: $scope.costeo.estado,
+            estado: estadoId,
             unidad1: $scope.costeo.unidad1,
             unidad2: $scope.costeo.unidad2,
             unidad3: $scope.costeo.unidad3,
@@ -312,6 +410,8 @@ angular.module("app").controller('editCosteosCtrl', function($rootScope, $scope,
             totalC2: data3[0].costoCmrc2,
             totalC3: data3[0].costoCmrc3,
             totalCR: data3[0].costoReal1,
+            indirecto: $scope.costeo.indirecto,
+            impuesto: $scope.costeo.impuesto,
             precioVenta: $scope.costeo.precioVenta,
             nota: $scope.costeo.nota,
             ClienteId: $scope.costeo.ClienteId,
@@ -335,7 +435,7 @@ angular.module("app").controller('editCosteosCtrl', function($rootScope, $scope,
                     costoCmrc3: data[i].costoCmrc3,
                     costoReal1: data[i].costoReal1,
                     CosteoId: costeo.id,
-                    ElementoprocesoId: elmentoId[0]
+                    ElementoId: elmentoId[0]
                 };
                 Costeo.saveElmnCosteo(elmcosteoTmp);
             }
@@ -354,7 +454,7 @@ angular.module("app").controller('editCosteosCtrl', function($rootScope, $scope,
                     costoCmrc3: data[i].costoCmrc3,
                     costoReal1: data[i].costoReal1,
                     CosteoId: costeo.id,
-                    ElementoprocesoId: elmentoId[0]
+                    ElementoId: elmentoId[0]
                 };
                 Costeo.saveElmnCosteo(elmcosteoTmp);
             }
@@ -362,8 +462,9 @@ angular.module("app").controller('editCosteosCtrl', function($rootScope, $scope,
         }).$promise;
 
         /*$scope.myGridConfig.options.columns[3].disabled = true;*/
-        console.log($scope.myData);
+        //console.log($scope.myData);
     };
+
 
     $scope.cambiaProceso = function(idProceso) {
         Proceso.categoriasAll(idProceso).then(function(procesos) {
@@ -372,10 +473,11 @@ angular.module("app").controller('editCosteosCtrl', function($rootScope, $scope,
             var data3 = [];
             if (procesos.length > 0) {
                 for (var i = 0; i < procesos[0].categorias.length; i++) {
+                    console.log(procesos[0].categorias[i]);
                     for (var j = 0; j < procesos[0].categorias[i].elementos.length; j++) {
                         var elemnt = {
-                            categoria: '' + procesos[0].categorias[i].id + '|' + procesos[0].categorias[i].categoriaNbr,
-                            elemento: '' + procesos[0].categorias[i].elementos[j].id + '|' + procesos[0].categorias[i].elementos[j].elemmentoNbr
+                            categoria: '' + procesos[0].categorias[i].CategoriumId + '|' + procesos[0].categorias[i].categoriaNbr,
+                            elemento: '' + procesos[0].categorias[i].elementos[j].ElementoId + '|' + procesos[0].categorias[i].elementos[j].elemmentoNbr
                         };
                         if (procesos[0].categorias[i].tipo == 'Y') {
                             data.push(elemnt);
@@ -392,7 +494,8 @@ angular.module("app").controller('editCosteosCtrl', function($rootScope, $scope,
             $scope.myData = data;
             $scope.myData2 = data2;
             $scope.myData3 = data3;
-            console.log(procesos);
+            $scope.costeo.impuesto = parseFloat(procesos[0].impuesto);
+            $scope.costeo.indirecto = parseFloat(procesos[0].indirecto);
         });
 
     }
@@ -401,11 +504,11 @@ angular.module("app").controller('editCosteosCtrl', function($rootScope, $scope,
         var valorCalc = 0;
         switch (tipo) {
             case "M":
-                valorCalc = valor * unidad;
+                valorCalc = valor * costo;
                 break;
             case "D":
-                if (unidad > 0) {
-                    valorCalc = Number((costo / unidad).toFixed(2));
+                if (valor > 0) {
+                    valorCalc = Number((costo / valor).toFixed(2));
                 }
                 break;
             case "A":
@@ -421,13 +524,12 @@ angular.module("app").controller('editCosteosCtrl', function($rootScope, $scope,
         return valorCalc;
     }
 
-    $scope.Actualizar = function(idProceso) {
 
+    $scope.Actualizar = function(idProceso) {
         Costeo.getCostoElm(idProceso).then(function(elementos) {
             var unidad1 = $scope.costeo.unidad1;
             var unidad2 = $scope.costeo.unidad2;
             var unidad3 = $scope.costeo.unidad3;
-            var unidad4 = $scope.costeo.unidad4;
             var data = $scope.myData;
             var data2 = $scope.myData2;
             var data3 = $scope.myData3;
@@ -438,6 +540,7 @@ angular.module("app").controller('editCosteosCtrl', function($rootScope, $scope,
             data3[0].costoCmrc2 = 0;
             data3[0].costoCmrc3 = 0;
             data3[0].costoReal1 = 0;
+            console.log(elementos);
             for (var j = 0; j < elementos.length; j++) {
                 for (var i = 0; i < data.length; i++) {
                     if (elementos[j].id == data[i].elemento[0]) {
@@ -447,11 +550,6 @@ angular.module("app").controller('editCosteosCtrl', function($rootScope, $scope,
                         data3[0].costoIni1 = parseFloat(data3[0].costoIni1) + parseFloat(data[i].costoIni1);
                         data3[0].costoIni2 = parseFloat(data3[0].costoIni2) + parseFloat(data[i].costoIni2);
                         data3[0].costoIni3 = parseFloat(data3[0].costoIni3) + parseFloat(data[i].costoIni3);
-                        data3[0].costoCmrc1 = parseFloat(data3[0].costoCmrc1) + parseFloat(data[i].costoCmrc1);
-                        data3[0].costoCmrc2 = parseFloat(data3[0].costoCmrc2) + parseFloat(data[i].costoCmrc2);
-                        data3[0].costoCmrc3 = parseFloat(data3[0].costoCmrc3) + parseFloat(data[i].costoCmrc3);
-                        data3[0].costoReal1 = parseFloat(data3[0].costoReal1) + parseFloat(data[i].costoReal1);
-
                     }
                 }
                 for (i = 0; i < data2.length; i++) {
@@ -462,10 +560,6 @@ angular.module("app").controller('editCosteosCtrl', function($rootScope, $scope,
                         data3[0].costoIni1 = parseFloat(data3[0].costoIni1) + parseFloat(data2[i].costoIni1);
                         data3[0].costoIni2 = parseFloat(data3[0].costoIni2) + parseFloat(data2[i].costoIni2);
                         data3[0].costoIni3 = parseFloat(data3[0].costoIni3) + parseFloat(data2[i].costoIni3);
-                        data3[0].costoCmrc1 = parseFloat(data3[0].costoCmrc1) + parseFloat(data2[i].costoCmrc1);
-                        data3[0].costoCmrc2 = parseFloat(data3[0].costoCmrc2) + parseFloat(data2[i].costoCmrc2);
-                        data3[0].costoCmrc3 = parseFloat(data3[0].costoCmrc3) + parseFloat(data2[i].costoCmrc3);
-                        data3[0].costoReal1 = parseFloat(data3[0].costoReal1) + parseFloat(data2[i].costoReal1);
                     }
                 }
 

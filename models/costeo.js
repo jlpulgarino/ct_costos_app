@@ -80,6 +80,16 @@ module.exports = function(sequelize, DataTypes) {
             field: 'totalCR',
             allowNull: true
         },
+        indirecto: {
+            type: DataTypes.DECIMAL(10, 2),
+            field: 'indirecto',
+            allowNull: false
+        },
+        impuesto: {
+            type: DataTypes.DECIMAL(10, 2),
+            field: 'impuesto',
+            allowNull: false
+        },
         precioVenta: {
             type: DataTypes.DECIMAL(10, 2),
             field: 'precioVenta',

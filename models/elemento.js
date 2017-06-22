@@ -37,6 +37,7 @@ module.exports = function(sequelize, DataTypes) {
                 db = dbP;
                 db.Elemento.belongsTo(db.Categoria);
                 db.Elemento.hasMany(db.Costo);
+                db.Elemento.hasMany(db.Elementocosteo);
             },
             save: function(model) {
                 return db.Elemento.findById(model.id).then(function(modelAnt) {

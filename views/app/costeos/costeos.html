@@ -44,7 +44,7 @@
                            <div class="table-responsive" >
                              <table class="table">
                                  <thead>
-                                     <tr><th></th><th>Nombre</th><th>Requerimiento</th>
+                                     <tr><th></th><th>Nombre</th><th>Requerimiento</th><th><span ng-class='text-success' ><i class="icon-edit-l" ></i></span></th>
                                      </tr>
                                  </thead>
                                <tbody>
@@ -52,6 +52,7 @@
                                      <td></td>
                                      <td>{{costeo.nombre}}</td>
                                      <td>{{costeo.requerimiento}}</td>
+                                     <td><a ng-click="editCosteo(costeo)" ><span ng-class="text-success" ><i class="icon-edit-l" ></i></span></a></td>
                                  </tr>
                                </tbody>
                              </table>

@@ -61,7 +61,7 @@ module.exports = function(sequelize, DataTypes) {
             associate: function(dbP) {
                 db = dbP;
                 db.Elementocosteo.belongsTo(db.Costeo);
-                db.Elementocosteo.belongsTo(db.Elementoproceso);
+                db.Elementocosteo.belongsTo(db.Elemento);
             },
             save: function(model) {
                 return db.Elementocosteo.findById(model.id).then(function(modelAnt) {

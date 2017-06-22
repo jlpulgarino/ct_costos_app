@@ -81,6 +81,8 @@ router.get('/:id/categoriasAll', function(req, res, next) {
                     id: procesos.id,
                     nombre: procesos.nombre,
                     descripcion: procesos.descripcion,
+                    indirecto: procesos.indirecto,
+                    impuesto: procesos.impuesto,
                     categorias: procesos.Categoriaprocesos.map(categoria => {
                         return Object.assign({}, {
                             id: categoria.id,

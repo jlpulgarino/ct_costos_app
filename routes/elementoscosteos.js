@@ -41,7 +41,7 @@ router.delete('/:id', function(req, res, next) {
 router.post('/', function(req, res, next) {
 
     var data = utils.getterFromPost(req);
-    console.log('CosteoId:'+data.get('CosteoId'))
+    console.log('ElemntoId:'+data.get('ElementoId'))
     var elementoEmulado = {
         id: data.get('id'),
         valor: data.get('valor'),
@@ -53,7 +53,7 @@ router.post('/', function(req, res, next) {
         costoCmrc3: data.get('costoCmrc3'),
         costoReal1: data.get('costoReal1'),
         CosteoId: data.get('CosteoId', 'Debe ingresar una CosteoId de costeo'),
-        ElementoprocesoId: data.get('ElementoprocesoId', 'Debe ingresar una ElementoprocesoId de costeo')
+        ElementoId: data.get('ElementoId', 'Debe ingresar una ElementoId de costeo')
     };
 
     db.Elementocosteo.save(elementoEmulado).then(function(elementoActualizado) {

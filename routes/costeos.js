@@ -56,6 +56,8 @@ router.post('/', function(req, res, next) {
         totalC2: data.get('totalC2'),
         totalC3: data.get('totalC3'),
         totalCR: data.get('totalCR'),
+        indirecto: data.get('indirecto', 'Debe digitar un indirecto para el proceso.'),
+        impuesto: data.get('impuesto', 'Debe digitar un impuesto para el proceso.'),
         precioVenta: data.get('precioVenta'),
         nota: data.get('nota'),
         ClienteId: data.get('ClienteId', 'Debe seleccionar un ClienteId para el costeo.'),
