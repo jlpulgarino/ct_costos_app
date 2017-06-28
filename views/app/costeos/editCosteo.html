@@ -25,24 +25,24 @@
                                         <input disabled="true" bled type="text" class="form-control" ng-model="costeo.id" id="id" placeholder="Id">
                                     </div>
                                 </div>
-                                <div class="form-group col-sm-3">
+                                <div class="form-group col-sm-3" >
                                     <label class="control-label col-sm-3" for="ProcesoId">Proceso:</label>
                                     <div class="col-sm-4">
-                                        <select name="catId" ng-model="costeo.ProcesoId" ng-options="proceso.id as proceso.nombre for proceso in procesos" ng-change='cambiaProceso(costeo.ProcesoId)'>
+                                        <select ng-disabled="costeo.estado != null" name="catId" ng-model="costeo.ProcesoId" ng-options="proceso.id as proceso.nombre for proceso in procesos" ng-change='cambiaProceso(costeo.ProcesoId)'>
                                       </select>
                                     </div>
                                 </div>
                                 <div class="form-group col-sm-3">
                                     <label class="control-label col-sm-3" for="ClienteId">Cliente:</label>
                                     <div class="col-sm-4">
-                                        <select name="catId" ng-model="costeo.ClienteId" ng-options="cliente.id as cliente.nombre for cliente in clientes">
+                                        <select name="catId" ng-disabled="(costeo.estado == 'C' || costeo.estado == 'F' )" ng-model="costeo.ClienteId" ng-options="cliente.id as cliente.nombre for cliente in clientes">
                                       </select>
                                     </div>
                                 </div>
                                 <div class="form-group col-sm-3">
                                     <label class="control-label col-sm-3" for="estado">Estado:</label>
                                     <div class="col-sm-4">
-                                        <select name="estado" ng-model="costeo.estado">
+                                        <select name="estado" ng-disabled="(costeo.estado == 'F' )" ng-model="costeo.estado">
                                         <option value="N">Nuevo</option>
                                         <option value="C">Costeado</option>
                                         <option value="F">Finalizado</option>
@@ -53,46 +53,51 @@
                             <div class="row">
                                 <div class="form-group col-sm-6">
                                     <label class="control-label col-sm-2" for="nombre">Nombre:</label>
-                                    <div class="col-sm-4"> <input bled type="text" class="form-control" ng-model="costeo.nombre" id="nombre" placeholder="Digite un nombre"> </div>
+                                    <div class="col-sm-4"> <input bled ng-disabled="(costeo.estado == 'C' || costeo.estado == 'F' )" type="text" class="form-control" ng-model="costeo.nombre" id="nombre" placeholder="Digite un nombre"> </div>
                                     <label class="control-label col-sm-2" for="requerimiento">Requerimiento:</label>
-                                    <div class="col-sm-4"> <input bled type="text" class="form-control" ng-model="costeo.requerimiento" id="requerimiento" placeholder="Digite un requerimiento"> </div>
+                                    <div class="col-sm-4"> <input bled type="text" class="form-control" ng-disabled="(costeo.estado == 'C' || costeo.estado == 'F' )" ng-model="costeo.requerimiento" id="requerimiento" placeholder="Digite un requerimiento"> </div>
                                 </div>
                                 <div class="form-group col-sm-6">
                                     <label class="control-label col-sm-2" for="indirecto">%Indirectos:</label>
-                                    <div class="col-sm-3"> <input bled type="number" class="form-control" ng-model="costeo.indirecto" id="indirecto"> </div>
+                                    <div class="col-sm-3"> <input bled type="text" class="form-control" ng-disabled="(costeo.estado == 'C' || costeo.estado == 'F' )" ng-model="costeo.indirecto" id="indirecto"> </div>
                                     <label class="control-label col-sm-2" for="impuesto">%Impuesto:</label>
-                                    <div class="col-sm-3"> <input bled type="number" class="form-control" ng-model="costeo.impuesto" id="impuesto"></div>
+                                    <div class="col-sm-3"> <input bled type="text" class="form-control" ng-disabled="(costeo.estado == 'C' || costeo.estado == 'F' )" ng-model="costeo.impuesto" id="impuesto"></div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-sm-3"> <label class="control-label col-sm-2" for="unidad1">Und1:</label>
-                                    <div class="col-sm-6"> <input bled type="number" class="form-control" ng-model="costeo.unidad1" id="unidad1"> </div>
+                                    <div class="col-sm-6"> <input bled type="text" class="form-control" ng-disabled="(costeo.estado == 'C' || costeo.estado == 'F' )" ng-model="costeo.unidad1" id="unidad1"> </div>
                                 </div>
                                 <div class="form-group col-sm-3"> <label class="control-label col-sm-2" for="unidad2">Und2:</label>
-                                    <div class="col-sm-6"> <input bled type="number" class="form-control" ng-model="costeo.unidad2" id="unidad2"> </div>
+                                    <div class="col-sm-6"> <input bled type="text" class="form-control" ng-disabled="(costeo.estado == 'C' || costeo.estado == 'F' )" ng-model="costeo.unidad2" id="unidad2"> </div>
                                 </div>
                                 <div class="form-group col-sm-3"> <label class="control-label col-sm-2" for="unidad3">Und3:</label>
-                                    <div class="col-sm-6"> <input bled type="number" class="form-control" ng-model="costeo.unidad3" id="unidad3"></div>
+                                    <div class="col-sm-6"> <input bled type="text" class="form-control" ng-disabled="(costeo.estado == 'C' || costeo.estado == 'F' )" ng-model="costeo.unidad3" id="unidad3"></div>
                                 </div>
                                 <div class="col-sm-1">
-                                    <button type="button" class="btn btn-default" ng-click="Actualizar(costeo.ProcesoId)">Actualizar</button>
+                                    <button type="button" ng-show="costeo.estado == null"   class="btn btn-default" ng-click="Actualizar(costeo.ProcesoId)">Actualizar</button>
                                 </div>
                                 <div class="col-sm-1">
-                                    <button type="button" class="btn btn-default" ng-click="Buscar()">Buscar</button>
+                                    <button type="button" ng-show="costeo.estado == null"  class="btn btn-default" ng-click="Buscar()">Buscar</button>
                                 </div>
                             </div>
-                            <div class="panel-body">
+                            <div class="row">
+                                <div class="form-group  col-sm-6"> <label class="control-label col-sm-2" for="nota">Nota:</label>
+                                    <div class="col-sm-8"> <textarea bled type="text" class="form-control" ng-disabled="(costeo.estado == 'C' || costeo.estado == 'F' )" ng-model="costeo.nota" id="nota" placeholder="Digite un nota"></textarea> </div>
+                                </div>
+                            </div>
+                            <div ng-show="costeo.estado == null" class="panel-body">
                                 <div class="form-group">
-                                <div class="col-sm-6">
-                                    <label class="control-label" for="tipo">Categria:</label>
-                                    <select name="catId" ng-model="filtro.catId" ng-options="categoria.id as categoria.nombre for categoria in categorias" ng-change ="cambiaCategoria(filtro.catId)">
+                                    <div class="col-sm-6">
+                                        <label class="control-label" for="tipo">Categria:</label>
+                                        <select name="catId"  ng-model="filtro.catId" ng-options="categoria.id as categoria.nombre for categoria in categorias" ng-change="cambiaCategoria(filtro.catId)">
                                     </select>
-                                  <label class="control-label" for="tipo">Elemento:</label>
-                                  <select name="elmId" ng-model="filtro.elmId" ng-options="elemento.id as elemento.nombre for elemento in elementos">
+                                        <label class="control-label" for="tipo">Elemento:</label>
+                                        <select name="elmId"  ng-model="filtro.elmId" ng-options="elemento.id as elemento.nombre for elemento in elementos">
                                   </select>
-                                  <button type="button" class="btn btn-default" ng-click="adicionarElemento()">Adicionar Elemento</button>
-                              </div>
-                          </div>
+                                        <button type="button"  class="btn btn-default" ng-click="adicionarElemento()">Adicionar Elemento</button>
+                                    </div>
+                                </div>
                             </div>
                             <div class="panel-body">
                                 <span ng-class="text-success">Indirectos</span>
@@ -105,20 +110,16 @@
                             <div class="panel-body">
                                 <div simple-grid="myGridConfig3"></div>
                             </div>
-                            <div class="form-group"> <label class="control-label col-sm-2" for="precioVenta">PrecioVenta:</label>
-                                <div class="col-sm-4"> <input bled type="text" class="form-control" ng-model="costeo.precioVenta" id="precioVenta" placeholder="Digite un precioVenta"> </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group  col-sm-6"> <label class="control-label col-sm-2" for="nota">Nota:</label>
-                                    <div class="col-sm-8"> <textarea bled type="text" class="form-control" ng-model="costeo.nota" id="nota" placeholder="Digite un nota"></textarea> </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-offset-2 col-sm-1">
-                                    <button type="submit" class="btn btn-default" ng-click="guardarCosteo()">Guardar</button>
-                                </div>
-                                <div class="col-sm-offset-1 col-sm-1">
-                                    <button type="cancel" class="btn btn-default" ng-click="cancel()">Cancelar</button>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-2 col-sm-1">
+                                            <button type="submit" class="btn btn-default" ng-click="guardarCosteo()">Guardar</button>
+                                        </div>
+                                        <div class="col-sm-offset-1 col-sm-1">
+                                            <button type="cancel" class="btn btn-default" ng-click="cancel()">Cancelar</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </ng-form>

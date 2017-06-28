@@ -90,9 +90,19 @@ module.exports = function(sequelize, DataTypes) {
             field: 'impuesto',
             allowNull: false
         },
-        precioVenta: {
+        prcVenta1: {
             type: DataTypes.DECIMAL(10, 2),
-            field: 'precioVenta',
+            field: 'prcVenta1',
+            allowNull: true
+        },
+        prcVenta2: {
+            type: DataTypes.DECIMAL(10, 2),
+            field: 'prcVenta2',
+            allowNull: true
+        },
+        prcVenta3: {
+            type: DataTypes.DECIMAL(10, 2),
+            field: 'prcVenta3',
             allowNull: true
         },
         nota: {

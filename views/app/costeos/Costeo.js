@@ -35,5 +35,13 @@
             return Http.get('elementosprocesos/costo/'+elmPrcId);
         };
 
+        self.getCostoElmInd = function(elmPrcId) {
+            return Http.get('elementos/'+elmPrcId+'/costo');
+        };
+
+        self.getCosteoElementos = function(costeoId) {
+            return Http.get('costeos/'+costeoId+'/elementoscosteos');
+        };
+
     });
 })();

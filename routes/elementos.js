@@ -68,5 +68,11 @@ router.get('/:idElm/costos', function(req, res, next) {
     }).catch(next);
 });
 
+router.get('/:idElm/costo', function(req, res, next) {
+    db.sequelize.query('SELECT * FROM public.costoelmindvw where  id = :idelm ',
+    { replacements: { idelm: req.params.idElm }}).then(function(resp) {
+        return res.send(resp[0]);
+    }).catch(next);
+});
 
 module.exports = router;

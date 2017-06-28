@@ -15,7 +15,13 @@ router.get('/:id', function(req, res, next) {
 });
 
 router.get('/', function(req, res, next) {
-    db.Costeo.findAll().then(function(resp) {
+    db.Costeo.findAll({
+        include: [{
+            model: db.Proceso,
+        },{
+            model: db.Cliente,
+        }]
+    }).then(function(resp) {
         return res.send(resp);
     }).catch(next);
 });
@@ -55,6 +61,9 @@ router.post('/', function(req, res, next) {
         totalC1: data.get('totalC1'),
         totalC2: data.get('totalC2'),
         totalC3: data.get('totalC3'),
+        prcVenta1: data.get('prcVenta1'),
+        prcVenta2: data.get('prcVenta2'),
+        prcVenta3: data.get('prcVenta3'),
         totalCR: data.get('totalCR'),
         indirecto: data.get('indirecto', 'Debe digitar un indirecto para el proceso.'),
         impuesto: data.get('impuesto', 'Debe digitar un impuesto para el proceso.'),
@@ -71,17 +80,15 @@ router.post('/', function(req, res, next) {
 });
 
 
-router.get('/:id/categoriasAll', function(req, res, next) {
+router.get('/:id/elementoscosteos', function(req, res, next) {
     db.Costeo.findAll({
         include: [{
-            model: db.Categoriacosteo,
+            model: db.Elementocosteo,
             include: [{
-                model: db.Elementocosteo,
+                model: db.Elemento,
                 include: [{
-                    model: db.Elemento
+                    model: db.Categoria
                 }]
-            },{
-                model: db.Categoria
             }]
         }],
 			where: {
@@ -90,7 +97,7 @@ router.get('/:id/categoriasAll', function(req, res, next) {
     }).then(function(costeos) {
         return costeos;
     }).then(costeos => {
-        const resObj = costeos.map(costeos => {
+        /*const resObj = costeos.map(costeos => {
                 return Object.assign({}, {
                     id: costeos.id,
                     nombre: costeos.nombre,
@@ -112,10 +119,10 @@ router.get('/:id/categoriasAll', function(req, res, next) {
                         })
                     })
                 })
-            })
-            //res.send(costeos)
+            })*/
+            res.send(costeos)
             //console.log(resObj);
-        res.send(resObj);
+        //res.send(resObj);
     }).catch(next);
 
 });
