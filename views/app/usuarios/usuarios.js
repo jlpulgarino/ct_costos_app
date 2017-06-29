@@ -69,3 +69,41 @@ angular.module("app").controller('editUsuarioCtrl', function($rootScope, $scope,
 
 
 });
+
+angular.module("app").controller('LoginCtrl', function($rootScope, $scope, $location, Usuario) {
+    console.log('CONTROLADOR_EDIT_LOGIN');
+    refresh();
+
+    function refresh() {
+        $scope.usuario = {
+
+        };
+        $scope.message = {
+            error: ''
+        };
+    }
+
+    $scope.entrar = function() {
+        var message = {
+            error: ''
+        };
+
+        var usuarioTmp = {
+            username: $scope.usuario.username,
+            password: $scope.usuario.password
+        };
+        $scope.promise = Usuario.login(usuarioTmp).then(function(usrLogin) {
+            if (usrLogin.length > 0){
+                $rootScope.usuarioLogueado = usrLogin[0];
+                console.log('LOGIN::UsurioLogueado::'+$rootScope.usuarioLogueado.nombre)
+                $location.path('/costeos');
+            }else{
+                message.error = "Usuario o contraseña invalida";
+            }
+            $scope.message = message;
+        }).$promise;
+
+    };
+
+
+});

@@ -99,26 +99,26 @@
             <div id="sidebar" class="nav-collapse ">
                 <!-- sidebar menu start-->
                 <ul class="sidebar-menu">
-                    <li class="active">
+                    <!--<li class="active">
                         <a class="" href="index.html">
                             <i class="icon_house_alt"></i>
                             <span>Quienes somos?</span>
                         </a>
-                    </li>
-                    <li class="sub-menu">
+                    </li>-->
+                    <li class="sub-menu" ng-show="usuarioLogueado.rol == 'A' || usuarioLogueado.rol == 'C'">
                         <a href="javascript:;" class="">
                             <i class="icon_document_alt"></i>
                             <span> Administracion</span>
                             <span class="menu-arrow arrow_carrot-right"></span>
                         </a>
-                        <ul class="sub">
-                            <li><a class="" href="#!/usuarios"> Usuarios</a></li>
-                            <li><a class="" href="#!/categorias"> Categorias</a></li>
-                            <li><a class="" href="#!/costos"> Costos</a></li>
-                            <li><a class="" href="#!/procesos"> Procesos</a></li>
+                        <ul class="sub" >
+                            <li ng-show="usuarioLogueado.rol == 'A' "><a class="" href="#!/usuarios"> Usuarios</a></li>
+                            <li ng-show="usuarioLogueado.rol == 'A' "><a class="" href="#!/categorias"> Categorias</a></li>
+                            <li ng-show="usuarioLogueado.rol == 'A' || usuarioLogueado.rol == 'C' "><a class="" href="#!/costos"> Costos</a></li>
+                            <li ng-show="usuarioLogueado.rol == 'A' "><a class="" href="#!/procesos"> Procesos</a></li>
                         </ul>
                     </li>
-                    <li class="sub-menu">
+                    <li class="sub-menu" ng-show="usuarioLogueado.rol == 'A' || usuarioLogueado.rol == 'D'">
                         <a href="javascript:;" class="">
                             <i class="icon_document_alt"></i>
                             <span> Clientes</span>
@@ -128,7 +128,7 @@
                             <li><a class="" href="#!/clientes"> Clientes</a></li>
                         </ul>
                     </li>
-                    <li class="sub-menu">
+                    <li class="sub-menu" ng-show="usuarioLogueado.rol ">
                         <a href="javascript:;" class="">
                             <i class="icon_document_alt"></i>
                             <span>Costeo</span>

@@ -50,7 +50,7 @@ app.config(function($routeProvider, $httpProvider, $mdThemingProvider) {
 app.config(["$stateProvider", "$urlRouterProvider", function(t, e) {
     e.otherwise("/"), t.state("index", {
         url: "/",
-        templateUrl: "../app/login/login.html"
+        templateUrl: "../app/usuarios/login.html"
     }).state("logout", {
         url: "/logout",
         templateUrl: "../app/login/logout.html"

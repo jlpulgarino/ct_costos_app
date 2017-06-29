@@ -13,11 +13,11 @@ function generateData() {
         force: true
     }).then(function() {
         return db.Usuario.create({
-            usuario: "tpulga",
-            nombre: "Tomas Pulgarin",
-            rol: "C",
-            email: "tpulga@hotmail.com",
-            password: "tpulga",
+            usuario: "admin",
+            nombre: "Administrador",
+            rol: "A",
+            email: "admin@coltoys.com",
+            password: "admin",
         });
     }).then(function() {
         return db.Categoria.create({
