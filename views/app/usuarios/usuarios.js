@@ -5,13 +5,13 @@ angular.module("app").controller('UsuariosCtrl', function($rootScope, $scope,  $
     refresh();
 
     function refresh() {
-        /*if(!(idUsuarioActual)){
+        if (!($rootScope.usuarioLogueado)) {
             $location.path('/login');
-        }else{*/
+        }else{
                     Usuario.getAll().then(function(usuarios) {
                         $scope.usuarios = usuarios;
                     });
-        /*}*/
+        }
     }
 
 
@@ -42,11 +42,11 @@ angular.module("app").controller('editUsuarioCtrl', function($rootScope, $scope,
     refresh();
 
     function refresh() {
-        $scope.usuario =$rootScope.idUsuarioActual;
-        /*if(!(idUsuarioActual)){
+        if (!($rootScope.usuarioLogueado)) {
             $location.path('/login');
         }else{
-        }*/
+            $scope.usuario =$rootScope.idUsuarioActual;
+        }
     }
 
     $scope.guardarUsuario = function() {
@@ -81,6 +81,10 @@ angular.module("app").controller('LoginCtrl', function($rootScope, $scope, $loca
         $scope.message = {
             error: ''
         };
+        if (!($rootScope.usuarioLogueado)) {
+            $location.path('/login');
+        }else{
+        }
     }
 
     $scope.entrar = function() {

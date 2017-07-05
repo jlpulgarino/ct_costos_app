@@ -10,9 +10,13 @@ angular.module("app").controller('costosCtrl', function($rootScope, $scope, $loc
         $scope.filtro = {
             elmId: 0
         };
-        Categoria.getAllElementos().then(function(categorias) {
-            $scope.categorias = categorias;
-        });
+        if (!($rootScope.usuarioLogueado)) {
+            $location.path('/login');
+        } else {
+            Categoria.getAllElementos().then(function(categorias) {
+                $scope.categorias = categorias;
+            });
+        }
     }
 
     $scope.buscaElementos = function(categoriaId){
@@ -59,7 +63,11 @@ angular.module("app").controller('editCostosCtrl', function($rootScope, $scope, 
         var costoObj={
             ElementoId: idElemento
         };
-        $scope.costo = costoObj;
+        if (!($rootScope.usuarioLogueado)) {
+            $location.path('/login');
+        } else {
+            $scope.costo = costoObj;
+        }
     }
 
     $scope.guardarCostos = function() {

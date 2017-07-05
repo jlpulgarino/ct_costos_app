@@ -43,5 +43,9 @@
             return Http.get('costeos/'+costeoId+'/elementoscosteos');
         };
 
+        self.fitrar = function(costeo) {
+            return Http.post('costeos/filtro', costeo);
+        };
+
     });
 })();

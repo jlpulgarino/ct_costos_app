@@ -5,13 +5,13 @@ angular.module("app").controller('ClientesCtrl', function($rootScope, $scope,  $
     refresh();
 
     function refresh() {
-        /*if(!(idClienteActual)){
+        if(!($rootScope.usuarioLogueado)){
             $location.path('/login');
-        }else{*/
+        }else{
                     Cliente.getAll().then(function(clientes) {
                         $scope.clientes = clientes;
                     });
-        /*}*/
+        }
     }
 
 
@@ -42,11 +42,11 @@ angular.module("app").controller('editClienteCtrl', function($rootScope, $scope,
     refresh();
 
     function refresh() {
-        $scope.cliente =$rootScope.idClienteActual;
-        /*if(!(idClienteActual)){
+        if(!($rootScope.usuarioLogueado)){
             $location.path('/login');
         }else{
-        }*/
+            $scope.cliente =$rootScope.idClienteActual;
+        }
     }
 
     $scope.guardarCliente = function() {

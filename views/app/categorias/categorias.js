@@ -9,13 +9,13 @@
 
      function refresh() {
 
-         /*if(!(idUsuarioActual)){
+         if(!($rootScope.usuarioLogueado)){
              $location.path('/login');
-         }else{*/
+         }else{
              Categoria.getAll().then(function(categorias) {
                  $scope.categorias = categorias;
              });
-         /*}*/
+         }
      }
 
 
@@ -61,9 +61,9 @@
         var catgActual = $rootScope.idCategoriaActual;
         $scope.categoria =$rootScope.idCategoriaActual;
         console.log(catgActual);
-        /*if(!(idUsuarioActual)){
+        if(!($rootScope.usuarioLogueado)){
             $location.path('/login');
-        }else{*/
+        }else{
             if (catgActual){
                 Categoria.getElementos(catgActual.id).then(function(categorias) {
                     if (categorias.length > 0){
@@ -72,7 +72,7 @@
                     }
                 });
             }
-        /*}*/
+        }
 
     }
 

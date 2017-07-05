@@ -4,11 +4,15 @@ angular.module("app").controller('editElementosCtrl', function($rootScope, $scop
     refreshSb();
 
     function refreshSb() {
-        $scope.elemento = $rootScope.idElementoActual;
-        if ($rootScope.idElementoActual){
-            /*Elemento.getCostos(idSubProyActual.id).then(function(tareas) {
-                $scope.tareas = tareas;
-            });*/
+        if (!($rootScope.usuarioLogueado)) {
+            $location.path('/login');
+        } else {
+            $scope.elemento = $rootScope.idElementoActual;
+            if ($rootScope.idElementoActual){
+                /*Elemento.getCostos(idSubProyActual.id).then(function(tareas) {
+                    $scope.tareas = tareas;
+                });*/
+            }
         }
     }
 

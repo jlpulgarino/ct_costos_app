@@ -9,13 +9,13 @@ angular.module("app").controller('ProcesosCtrl', function($rootScope, $scope, $l
 
     function refresh() {
 
-        /*if(!(idUsuarioActual)){
+        if (!($rootScope.usuarioLogueado)) {
             $location.path('/login');
-        }else{*/
+        }else{
         Proceso.getAll().then(function(procesos) {
             $scope.procesos = procesos;
         });
-        /*}*/
+        }
     }
 
 
@@ -61,9 +61,9 @@ angular.module("app").controller('editProcesosCtrl', function($rootScope, $scope
         var prcgActual = $rootScope.idProcesoActual;
         $scope.proceso = $rootScope.idProcesoActual;
         $scope.tree_data = [];
-        /*if(!(idUsuarioActual)){
+        if (!($rootScope.usuarioLogueado)) {
             $location.path('/login');
-        }else{*/
+        }else{
         if (prcgActual) {
             $scope.col_defs = [{
                 field: 'addCat',
@@ -119,7 +119,7 @@ angular.module("app").controller('editProcesosCtrl', function($rootScope, $scope
                 }
             });
         }
-        /*}*/
+        }
 
     }
 
@@ -187,9 +187,9 @@ angular.module("app").controller('addElementoCtrl', function($rootScope, $scope,
 
     function refresh() {
 
-        /*if(!(idUsuarioActual)){
+        if (!($rootScope.usuarioLogueado)) {
             $location.path('/login');
-        }else{*/
+        }else{
         var idCAtegoria = $rootScope.catPrcId;
         var prcActual = $rootScope.idProcesoActual;
         var elementos = [];
@@ -209,7 +209,7 @@ angular.module("app").controller('addElementoCtrl', function($rootScope, $scope,
             };
             console.log(elementos);
         });
-        /*}*/
+        }
     }
 
 
@@ -240,9 +240,9 @@ angular.module("app").controller('addCategoriaCtrl', function($rootScope, $scope
 
     function refresh() {
 
-        /*if(!(idUsuarioActual)){
+        if (!($rootScope.usuarioLogueado)) {
             $location.path('/login');
-        }else{*/
+        }else{
         Categoria.getAllElementos().then(function(categorias) {
             $scope.categorias = categorias;
             var procesoActual = $rootScope.idProcesoActual;
@@ -250,7 +250,7 @@ angular.module("app").controller('addCategoriaCtrl', function($rootScope, $scope
                 procesoId: procesoActual.id
             }
         });
-        /*}*/
+        }
     }
 
 

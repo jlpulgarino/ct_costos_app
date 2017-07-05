@@ -75,7 +75,7 @@
                                     <div class="col-sm-6"> <input bled type="text" class="form-control" ng-disabled="(costeo.estado == 'C' || costeo.estado == 'F' )" ng-model="costeo.unidad3" id="unidad3"></div>
                                 </div>
                                 <div class="col-sm-1">
-                                    <button type="button" ng-show="costeo.estado == null"   class="btn btn-default" ng-click="Actualizar(costeo.ProcesoId)">Actualizar</button>
+                                    <button type="button" ng-show="(costeo.estado == null || costeo.estado == 'N')"   class="btn btn-default" ng-click="Actualizar(costeo.ProcesoId)">Actualizar</button>
                                 </div>
                                 <div class="col-sm-1">
                                     <button type="button" ng-show="costeo.estado == null"  class="btn btn-default" ng-click="Buscar()">Buscar</button>

@@ -79,6 +79,68 @@ router.post('/', function(req, res, next) {
 
 });
 
+router.post('/filtro', function(req, res, next) {
+
+    var data = utils.getterFromPost(req);
+    var nombre = data.get('nombre');
+    var requerimiento = data.get('requerimiento');
+    var ClienteId = data.get('ClienteId');
+    var ProcesoId = data.get('ProcesoId');
+    var fecha = data.get('fecha');
+    var rangoCliente = [0,999999999];
+    var rangoProceso = [0,999999999];
+
+    if(!nombre){
+        nombre ='%';
+    }else{
+        nombre = nombre+'%';
+    }
+
+    if(!requerimiento){
+        requerimiento ='%';
+    }else{
+        requerimiento = requerimiento+'%';
+    }
+
+    if(ClienteId){
+        rangoCliente[0] = ClienteId;
+        rangoCliente[1] = ClienteId;
+    }
+
+    if(ProcesoId){
+        rangoProceso[0] = ProcesoId;
+        rangoProceso[1] = ProcesoId;
+    }
+
+    db.Costeo.findAll({
+        include: [{
+            model: db.Proceso,
+        },{
+            model: db.Cliente,
+        }],
+        where: {
+            $and: [
+            {nombre: {
+                  $like: nombre
+              }},
+              {requerimiento: {
+                    $like: requerimiento
+                }},
+            {ClienteId: {
+                $between: rangoCliente
+            }},
+            {ProcesoId: {
+                $between: rangoProceso
+            }}
+        ]}
+    }).then(function(costeos) {
+        return costeos;
+    }).then(costeos => {
+            res.send(costeos)
+    }).catch(next);
+
+});
+
 
 router.get('/:id/elementoscosteos', function(req, res, next) {
     db.Costeo.findAll({
