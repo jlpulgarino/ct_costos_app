@@ -5,9 +5,9 @@ angular.module("app").controller('costeosCtrl', function($rootScope, $scope, $lo
 
     function refreshSb() {
 
-        /*if (!($rootScope.usuarioLogueado)) {
+        if (!($rootScope.usuarioLogueado)) {
             $location.path('/login');
-        } else {*/
+        } else {
         Costeo.getAll().then(function(costeos) {
             $scope.costeos = costeos;
             $rootScope.costeoIdActual = null;
@@ -19,7 +19,7 @@ angular.module("app").controller('costeosCtrl', function($rootScope, $scope, $lo
                 });
             });
         });
-        /*}*/
+        }
     }
 
 
@@ -225,6 +225,7 @@ angular.module("app").controller('editCosteosCtrl', function($rootScope, $scope,
         $scope.myData3 = data3;
 
         $scope.costeo = $rootScope.costeoIdActual;
+        $rootScope.estadoOriginal = $rootScope.costeoIdActual.estado;
         Proceso.getAll().then(function(procesos) {
             $scope.procesos = procesos;
             Cliente.getAll().then(function(clientes) {
@@ -422,6 +423,15 @@ angular.module("app").controller('editCosteosCtrl', function($rootScope, $scope,
             });
         });
 
+    }
+
+    $scope.cambiaEstado = function() {
+        var nuevoEstado = $scope.costeo.estado;
+        var origEstado = $rootScope.estadoOriginal;
+        if($rootScope.usuarioLogueado.rol != 'A' && origEstado != nuevoEstado && nuevoEstado == 'N' && origEstado  ){
+                        
+        }
+        console.log(origEstado+' --- '+nuevoEstado);
     }
 
     $scope.cambiaCategoria = function(par_categoriaId) {
@@ -625,7 +635,9 @@ angular.module("app").controller('editCosteosCtrl', function($rootScope, $scope,
                 };
                 Costeo.saveElmnCosteo(elmcosteoTmp);
             }
-
+            $rootScope.costeoIdActual = costeo;
+            console.log($rootScope.costeoIdActual.id);
+            $location.path('/costeos');
         }).$promise;
 
         /*$scope.myGridConfig.options.columns[3].disabled = true;*/
