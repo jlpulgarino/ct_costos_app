@@ -131,6 +131,7 @@ angular.module("app").controller('editCosteosCtrl', function($rootScope, $scope,
         $scope.filtro = {
             elmId: 0
         };
+        message = {};
         var disableInicial = false;
         var disableComercial = false;
         var disableReal = false;
@@ -429,7 +430,12 @@ angular.module("app").controller('editCosteosCtrl', function($rootScope, $scope,
         var nuevoEstado = $scope.costeo.estado;
         var origEstado = $rootScope.estadoOriginal;
         if($rootScope.usuarioLogueado.rol != 'A' && origEstado != nuevoEstado && nuevoEstado == 'N' && origEstado  ){
-                        
+            var mensajeTmp = {
+                error : 'No puede cambiar el estado a NUEVO.'
+            };
+            $scope.message = mensajeTmp;
+            $rootScope.costeoIdActual.estado = origEstado;
+            $scope.costeo = $rootScope.costeoIdActual;
         }
         console.log(origEstado+' --- '+nuevoEstado);
     }

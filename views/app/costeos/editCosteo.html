@@ -15,6 +15,12 @@
                 <section class="panel">
                     <header class="panel-heading">
                         Costeo
+                        <div ng-show="message.error" class="alert alert-block alert-danger fade in">
+                            <button data-dismiss="alert" class="close close-sm" type="button">
+                                <i class="icon-remove"></i>
+                            </button>
+                            <strong>{{message.error}}</strong>
+                        </div>
                     </header>
                     <div class="panel-body">
                         <ng-form class="form-horizontal" ng-action="#/procesos">
