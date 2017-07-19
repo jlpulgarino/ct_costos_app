@@ -88,8 +88,14 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="form-group  col-sm-6"> <label class="control-label col-sm-2" for="nota">Nota:</label>
-                                    <div class="col-sm-8"> <textarea bled type="text" class="form-control" ng-disabled="(costeo.estado == 'C' || costeo.estado == 'F' )" ng-model="costeo.nota" id="nota" placeholder="Digite un nota"></textarea> </div>
+                                <div class="form-group  col-sm-8">
+                                    <div class="col-sm-4">
+                                        <img ng-src="/img/costeos/{{costeo.id}}" class="img-rounded" width="304" height="236">
+                                       <input type="file" id="file" name="file" ng-model="file" >
+                                       <p class="help-block">Seleccione una imagen.</p>
+                                    </div>
+                                    <label class="control-label col-sm-2" for="nota">Nota:</label>
+                                    <div class="col-sm-4"> <textarea bled type="text" class="form-control" ng-disabled="(costeo.estado == 'C' || costeo.estado == 'F' )" ng-model="costeo.nota" id="nota" placeholder="Digite un nota"></textarea> </div>
                                 </div>
                             </div>
                             <div ng-show="costeo.estado == null" class="panel-body">

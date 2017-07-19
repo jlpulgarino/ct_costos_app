@@ -7,6 +7,25 @@ var router = express.Router();
 var bcrypt = require('bcrypt-nodejs');
 var passport = require('passport');
 var moment = require('moment');
+var multer = require('multer');
+var FS = require('fs');
+var storage = multer.diskStorage({
+    destination: function(req, file, callback) {
+        callback(null, 'views/img/costeos');
+        //console.log(req.body);
+        //callback(null, 'C:/Users/JoséLuis/Desktop/workspace/Img');
+    },
+    filename: function(req, file, callback) {
+        //callback(null, file.fieldname + '-' + Date.now()+'.'+file.originalname.split('.')[file.originalname.split('.').length -1]);
+        //callback(null, file.originalname);
+        callback(null, req.body.id);
+    }
+});
+
+var upload = multer({
+    storage: storage
+}).single('file');
+
 
 router.get('/:id', function(req, res, next) {
     db.Costeo.findById(req.params.id).then(function(resp) {
@@ -189,5 +208,20 @@ router.get('/:id/elementoscosteos', function(req, res, next) {
 
 });
 
+
+router.post('/file', function(req, res, next) {
+ upload(req, res, function(err) {
+     console.log(req.body);
+     if (err) {
+         res.json({
+             error_code: 1,
+             err_desc: err
+         });
+         return;
+    }
+     res.json({error_code:0,err_desc:null});
+});
+ console.log(upload);
+});
 
 module.exports = router;

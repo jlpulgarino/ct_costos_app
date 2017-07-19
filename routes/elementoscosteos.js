@@ -8,6 +8,7 @@ var bcrypt = require('bcrypt-nodejs');
 var passport = require('passport');
 var moment = require('moment');
 
+
 router.get('/:id', function(req, res, next) {
     db.Elementocosteo.findById(req.params.id).then(function(resp) {
         return res.send(resp);
@@ -19,6 +20,7 @@ router.get('/', function(req, res, next) {
         return res.send(resp);
     }).catch(next);
 });
+
 
 
 

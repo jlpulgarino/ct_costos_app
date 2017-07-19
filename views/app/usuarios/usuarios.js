@@ -84,6 +84,7 @@ angular.module("app").controller('LoginCtrl', function($rootScope, $scope, $loca
         if (!($rootScope.usuarioLogueado)) {
             $location.path('/login');
         }else{
+            $rootScope.usuarioLogueado = null;
         }
     }
 

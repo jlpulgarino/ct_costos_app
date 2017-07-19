@@ -2,7 +2,7 @@
  * Servicio para enviar codigo de respuesta al servicor
  */
 (function() {
-    angular.module('app').service('Costeo', function(Http, EventHandler) {
+    angular.module('app').service('Costeo', function(Http, Upload, EventHandler) {
         console.log('JLPO_CREACION_SERVICIO_COSTEO');
         self = this;
 
@@ -29,6 +29,14 @@
 
         self.saveElmnCosteo = function(costeo) {
             return Http.post('elementoscosteos/', costeo);
+        };
+
+        self.createFile = function(costeo, imagenFile, progressCallback, endCallback) {
+            Upload.upload({
+                url: 'api/costeos/file',
+                fields: costeo,
+                file: imagenFile
+            }).progress(progressCallback).success(endCallback).error(EventHandler.error);
         };
 
         self.getCostoElm = function(elmPrcId) {

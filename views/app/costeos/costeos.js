@@ -120,6 +120,7 @@ angular.module("app").controller('editCosteosCtrl', function($rootScope, $scope,
 
     function refresh() {
         console.log($rootScope.usuarioLogueado);
+        $scope.message = {};
         if (!($rootScope.usuarioLogueado)) {
             $location.path('/login');
         } else {
@@ -131,7 +132,6 @@ angular.module("app").controller('editCosteosCtrl', function($rootScope, $scope,
         $scope.filtro = {
             elmId: 0
         };
-        message = {};
         var disableInicial = false;
         var disableComercial = false;
         var disableReal = false;
@@ -143,6 +143,8 @@ angular.module("app").controller('editCosteosCtrl', function($rootScope, $scope,
         var costeoActual = $rootScope.costeoIdActual;
 
         if (costeoActual) {
+            $scope.costeo = $rootScope.costeoIdActual;
+            $rootScope.estadoOriginal = $rootScope.costeoIdActual.estado;
             var totc1 = costeoActual.totalC1;
             var totc2 = costeoActual.totalC2;
             var totc3 = costeoActual.totalC3;
@@ -225,8 +227,6 @@ angular.module("app").controller('editCosteosCtrl', function($rootScope, $scope,
         $scope.myData2 = data2;
         $scope.myData3 = data3;
 
-        $scope.costeo = $rootScope.costeoIdActual;
-        $rootScope.estadoOriginal = $rootScope.costeoIdActual.estado;
         Proceso.getAll().then(function(procesos) {
             $scope.procesos = procesos;
             Cliente.getAll().then(function(clientes) {
@@ -575,6 +575,10 @@ angular.module("app").controller('editCosteosCtrl', function($rootScope, $scope,
             estadoId = "N";
         }
         $scope.Totalizar();
+        var f = document.getElementById('file').files[0],
+        r = new FileReader();
+        r.readAsBinaryString(f);
+
         var costeoTmp = {
             id: $scope.costeo.id,
             nombre: $scope.costeo.nombre,
@@ -643,6 +647,11 @@ angular.module("app").controller('editCosteosCtrl', function($rootScope, $scope,
             }
             $rootScope.costeoIdActual = costeo;
             console.log($rootScope.costeoIdActual.id);
+            if(f){
+                Costeo.createFile(costeo, f, function(evt) {}, function(data) {
+                    console.log(data);
+                });
+            }
             $location.path('/costeos');
         }).$promise;
 
