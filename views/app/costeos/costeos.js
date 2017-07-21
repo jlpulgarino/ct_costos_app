@@ -575,9 +575,10 @@ angular.module("app").controller('editCosteosCtrl', function($rootScope, $scope,
             estadoId = "N";
         }
         $scope.Totalizar();
-        var f = document.getElementById('file').files[0],
-        r = new FileReader();
-        r.readAsBinaryString(f);
+        var f = document.getElementById('file').files[0],r = new FileReader();
+        if(f){
+            r.readAsBinaryString(f);
+        }
 
         var costeoTmp = {
             id: $scope.costeo.id,
