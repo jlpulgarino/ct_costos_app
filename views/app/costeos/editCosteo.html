@@ -98,7 +98,7 @@
                                     <div class="col-sm-4"> <textarea bled type="text" class="form-control" ng-disabled="(costeo.estado == 'C' || costeo.estado == 'F' )" ng-model="costeo.nota" id="nota" placeholder="Digite un nota"></textarea> </div>
                                 </div>
                             </div>
-                            <div ng-show="costeo.estado == null" class="panel-body">
+                            <div ng-show="(costeo.estado == null || costeo.estado == 'N')" class="panel-body">
                                 <div class="form-group">
                                     <div class="col-sm-6">
                                         <label class="control-label" for="tipo">Categria:</label>
